@@ -43,10 +43,10 @@ func _enter_tree():
 @export var KEY_BIND_MOUSE_SENS := 0.005
 @export var KEY_BIND_MOUSE_ACCEL := 50
 @export_subgroup("Movement")
-@export var KEY_BIND_UP := "ui_up"
-@export var KEY_BIND_LEFT := "ui_left"
-@export var KEY_BIND_RIGHT := "ui_right"
-@export var KEY_BIND_DOWN := "ui_down"
+@export var KEY_BIND_UP := "forward"
+@export var KEY_BIND_LEFT := "left"
+@export var KEY_BIND_RIGHT := "right"
+@export var KEY_BIND_DOWN := "backward"
 @export var KEY_BIND_JUMP := "ui_accept"
 
 @export_category("Advanced")

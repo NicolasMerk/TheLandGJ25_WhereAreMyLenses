@@ -58,6 +58,3 @@ environment = SubResource("Environment_4mccc")
 
 [node name="Basic FPS Player" parent="." instance=ExtResource("1_85nyy")]
 KEY_BIND_UP = "forward"
-KEY_BIND_LEFT = "left"
-KEY_BIND_RIGHT = "right"
-KEY_BIND_DOWN = "backward"
