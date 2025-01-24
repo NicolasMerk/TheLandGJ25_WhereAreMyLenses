@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://vupfism0y8ub"]
+[gd_scene load_steps=10 format=3 uid="uid://vupfism0y8ub"]
 
-[ext_resource type="Script" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_fpauf"]
-[ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_uri1i"]
+[ext_resource type="PackedScene" uid="uid://4h7txwaun5q1" path="res://basic_fps_player.tscn" id="1_85nyy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_caja7"]
 size = Vector3(50, 0, 50)
@@ -28,8 +27,6 @@ sky_material = SubResource("PanoramaSkyMaterial_msuu0")
 sky = SubResource("Sky_4ggmq")
 ambient_light_source = 3
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_li7ud"]
-
 [node name="main" type="Node3D"]
 
 [node name="Floor" type="StaticBody3D" parent="."]
@@ -53,18 +50,10 @@ transform = Transform3D(4.27484, -1.58703, 4.62899, 3.90354, 4.81261, -1.9549, -
 mesh = SubResource("BoxMesh_i1cfu")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.993258, 0.115925, 0, -0.115925, -0.993258, 1.99157, 9.78125, -4.48814)
+transform = Transform3D(1, 0, 0, 0, -0.952661, 0.304033, 0, -0.304033, -0.952661, 1.99157, 9.78125, -4.48814)
 shadow_enabled = true
 
 [node name="Enivroment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4mccc")
 
-[node name="Basic FPS Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-script = ExtResource("1_fpauf")
-
-[node name="Head" parent="Basic FPS Player" instance=ExtResource("2_uri1i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.412659, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Basic FPS Player"]
-shape = SubResource("CapsuleShape3D_li7ud")
+[node name="Basic FPS Player" parent="." instance=ExtResource("1_85nyy")]

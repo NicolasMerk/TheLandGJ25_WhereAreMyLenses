@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://cuowist1iksg3"]
+
+[ext_resource type="PackedScene" uid="uid://4h7txwaun5q1" path="res://basic_fps_player.tscn" id="1_088cv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0a3c"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_chrf2"]
+sky_material = SubResource("ProceduralSkyMaterial_e0a3c")
+
+[sub_resource type="Environment" id="Environment_qvvhv"]
+background_mode = 2
+sky = SubResource("Sky_chrf2")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cbc88"]
+size = Vector2(1500, 1500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e1ac4"]
+size = Vector3(1500, 1, 1500)
+
+[sub_resource type="TorusMesh" id="TorusMesh_12656"]
+inner_radius = 7.326
+outer_radius = 11.275
+
+[sub_resource type="BoxMesh" id="BoxMesh_hg074"]
+size = Vector3(1, 5.58, 9)
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qvvhv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_cbc88")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_e1ac4")
+
+[node name="Basic FPS Player" parent="." instance=ExtResource("1_088cv")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.18877, -0.982021, 0, 0.982021, 0.18877, 41.6771, 6.64713, 0)
+mesh = SubResource("TorusMesh_12656")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.935561, 0.0168949, -0.35276, -0.343607, -0.187259, -0.920254, -0.0816053, 0.982165, -0.169387, 0, 4.73464, 15.7853)
+mesh = SubResource("BoxMesh_hg074")
