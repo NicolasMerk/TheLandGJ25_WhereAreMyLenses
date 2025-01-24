@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://vupfism0y8ub"]
+[gd_scene load_steps=10 format=3 uid="uid://vupfism0y8ub"]
 
-[ext_resource type="Script" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_fpauf"]
-[ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_uri1i"]
+[ext_resource type="PackedScene" uid="uid://4h7txwaun5q1" path="res://basic_fps_player.tscn" id="1_85nyy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_caja7"]
 size = Vector3(50, 0, 50)
@@ -27,8 +26,6 @@ sky_material = SubResource("PanoramaSkyMaterial_msuu0")
 [sub_resource type="Environment" id="Environment_4mccc"]
 sky = SubResource("Sky_4ggmq")
 ambient_light_source = 3
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_li7ud"]
 
 [node name="main" type="Node3D"]
 
@@ -59,12 +56,8 @@ shadow_enabled = true
 [node name="Enivroment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4mccc")
 
-[node name="Basic FPS Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-script = ExtResource("1_fpauf")
-
-[node name="Head" parent="Basic FPS Player" instance=ExtResource("2_uri1i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.412659, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Basic FPS Player"]
-shape = SubResource("CapsuleShape3D_li7ud")
+[node name="Basic FPS Player" parent="." instance=ExtResource("1_85nyy")]
+KEY_BIND_UP = "forward"
+KEY_BIND_LEFT = "left"
+KEY_BIND_RIGHT = "right"
+KEY_BIND_DOWN = "backward"
