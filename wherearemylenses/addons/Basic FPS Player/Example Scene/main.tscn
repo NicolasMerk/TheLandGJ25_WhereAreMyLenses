@@ -50,11 +50,10 @@ transform = Transform3D(4.27484, -1.58703, 4.62899, 3.90354, 4.81261, -1.9549, -
 mesh = SubResource("BoxMesh_i1cfu")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.993258, 0.115925, 0, -0.115925, -0.993258, 1.99157, 9.78125, -4.48814)
+transform = Transform3D(1, 0, 0, 0, -0.952661, 0.304033, 0, -0.304033, -0.952661, 1.99157, 9.78125, -4.48814)
 shadow_enabled = true
 
 [node name="Enivroment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4mccc")
 
 [node name="Basic FPS Player" parent="." instance=ExtResource("1_85nyy")]
-KEY_BIND_UP = "forward"

@@ -7,6 +7,7 @@
 
 [node name="Basic FPS Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+motion_mode = 1
 script = ExtResource("1_l47eq")
 
 [node name="Head" parent="." instance=ExtResource("2_4nc5u")]
