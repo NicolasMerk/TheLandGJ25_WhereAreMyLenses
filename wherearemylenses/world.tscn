@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=12 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="Material" path="res://glowing_mcguffin.tres" id="1_1erht"]
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
@@ -27,6 +27,9 @@ size = Vector3(1500, 1, 1500)
 inner_radius = 7.326
 outer_radius = 11.275
 
+[sub_resource type="BoxMesh" id="BoxMesh_a2nwf"]
+size = Vector3(160, 1, 160)
+
 [sub_resource type="SphereMesh" id="SphereMesh_e4a3a"]
 material = ExtResource("1_1erht")
 radius = 20.0
@@ -37,11 +40,15 @@ height = 40.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qvvhv")
 
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
+motion_mode = 0
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
 [node name="Floor" type="StaticBody3D" parent="."]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("PlaneMesh_cbc88")
@@ -51,13 +58,14 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_e1ac4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.18877, -0.982021, 0, 0.982021, 0.18877, 6.34686, 6.64713, -13.0231)
+transform = Transform3D(1, 0, 0, 0, 0.18877, -0.982021, 0, 0.982021, 0.18877, 6.34686, 10.5538, -13.0231)
 mesh = SubResource("TorusMesh_12656")
+
+[node name="Wall1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0358018, -0.77344, -0.632856, -0.447772, 0.553724, -0.702061, 0.893431, 0.30851, -0.3265, 0, -20.1392, -18.9289)
+mesh = SubResource("BoxMesh_a2nwf")
 
 [node name="GlowingMcGuffin" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.935561, 0.0168949, -0.35276, -0.343607, -0.187259, -0.920254, -0.0816053, 0.982165, -0.169387, -182.615, -79.3989, 15.7853)
 mesh = SubResource("SphereMesh_e4a3a")
 script = ExtResource("2_2qduu")
-
-[node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
-motion_mode = 0

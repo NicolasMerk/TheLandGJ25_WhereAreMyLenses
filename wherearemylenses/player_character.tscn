@@ -36,6 +36,7 @@ func await_game_over() -> void:
 	$AwaitGameOverTimer.start()
 
 func _ready():
+	add_to_group(\"character\")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
