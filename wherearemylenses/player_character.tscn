@@ -1,7 +1,5 @@
 [gd_scene load_steps=8 format=3 uid="uid://67axyi1xr1bu"]
 
-[ext_resource type="Texture2D" uid="uid://w48bom8tpbgc" path="res://Assets/Player_Meter/Meter_Needle.png" id="1_7r18b"]
-
 [sub_resource type="GDScript" id="GDScript_25k6p"]
 script/source = "extends CharacterBody3D
 
@@ -140,7 +138,7 @@ func _input(p_event: InputEvent) -> void:
 script/source = "extends Sprite2D
 
 
-var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle.png\")
+var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle_V2.png\")
 
 
 func _ready() -> void:
@@ -165,7 +163,7 @@ const MAX_NITROGEN_EXCESS := 24. # This valua is used to check for decompression
 const MAX_NITROGEN_SATURATION := 100. # nitrogen_saturation > MAX_NITROGEN_SATURATION leads to max depth_intoxication.
 
 func _process(p_delta: float) -> void:
-	# TODO: Update tank_pressure depending on the depth!
+	tank_pressure -= p_delta * 5.
 	$\"../Camera3D/CanvasLayer/ArmLeftSprite2D/NeedleSprite2D\".set_needle(tank_pressure / MAX_TANK_PRESSURE)
 
 	nitrogen_saturation = lerp(nitrogen_saturation, global_position.z, p_delta * NITROGEN_SATURATION_RATE)
@@ -209,7 +207,7 @@ scale = Vector2(0.375, 0.375)
 script = SubResource("GDScript_d3jor")
 
 [node name="NeedleSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer/ArmLeftSprite2D"]
-position = Vector2(-8, -72)
+position = Vector2(16, -72)
 script = SubResource("GDScript_j4p65")
 
 [node name="AwaitGameOverTimer" type="Timer" parent="."]
