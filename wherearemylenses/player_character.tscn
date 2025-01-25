@@ -410,18 +410,18 @@ volume_db = -3.0
 autoplay = true
 script = SubResource("GDScript_4vrav")
 
+[node name="JacketPlayersNode" type="Node" parent="AudioStreamPlayersNode"]
+
+[node name="JacketInPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/JacketPlayersNode"]
+
+[node name="JacketOutPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/JacketPlayersNode"]
+
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 amount = 700
 lifetime = 10.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_xxm07")
 draw_pass_1 = SubResource("QuadMesh_rp6hd")
-
-[node name="JacketPlayersNode" type="Node" parent="AudioStreamPlayersNode"]
-
-[node name="JacketInPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/JacketPlayersNode"]
-
-[node name="JacketOutPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/JacketPlayersNode"]
 
 [connection signal="timeout" from="AwaitGameOverTimer" to="." method="_on_await_game_over_timer_timeout"]
 [connection signal="finished" from="AudioStreamPlayersNode/AudioStreamPlayer" to="AudioStreamPlayersNode/AudioStreamPlayer" method="_on_finished"]
