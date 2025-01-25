@@ -1,0 +1,212 @@
+[gd_scene load_steps=8 format=3 uid="uid://67axyi1xr1bu"]
+
+[ext_resource type="Texture2D" uid="uid://w48bom8tpbgc" path="res://Assets/Player_Meter/Meter_Needle.png" id="1_7r18b"]
+
+[sub_resource type="GDScript" id="GDScript_25k6p"]
+script/source = "extends CharacterBody3D
+
+
+var block_input := false
+
+const SWIM_SPEED_FORWARD := 1.
+const SWIM_SPEED_BACKWARD := .1
+
+
+func await_game_over() -> void:
+	block_input = true
+	$AwaitGameOverTimer.start()
+
+func _input(p_event: InputEvent) -> void:
+	pass
+	# TODO: Check for breathing (in/out) and block breathing in once the tank is empty!
+
+func _process(p_delta: float) -> void:
+	var global_forward_vector := Vector3.FORWARD * transform.basis * p_delta # Can't verify if this works right now.
+	if Input.is_action_pressed(\"forward\"):
+		velocity += global_forward_vector * SWIM_SPEED_FORWARD
+	elif Input.is_action_pressed(\"backward\"):
+		velocity -= global_forward_vector * SWIM_SPEED_BACKWARD
+
+func _physics_process(p_delta: float) -> void:
+	move_and_slide()
+
+
+# TODO: Make this boi unload world.tscn and open a game over menu!
+func _on_await_game_over_timer_timeout() -> void:
+	queue_free()
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xk0f7"]
+
+[sub_resource type="GDScript" id="GDScript_p4012"]
+script/source = "extends Camera3D
+
+
+var rotation_amplitude := 0.
+var time_passed := 0.
+
+const ROTATION_SPEED := 1.
+
+func _process(p_delta: float) -> void:
+	time_passed += p_delta
+
+	rotation_amplitude += $\"..\".velocity.length()
+	rotation_amplitude = clampf(rotation_amplitude, 0., 1.)
+
+	rotation.z = sin(time_passed * ROTATION_SPEED) * rotation_amplitude
+"
+
+[sub_resource type="GDScript" id="GDScript_cqw7g"]
+script/source = "extends Sprite3D
+
+
+var tex_bubbles_none = load(\"res://Assets/Player_RightHand/PlayerRightHand_1_Clean_Open.png\")
+var tex_bubbles_few = load(\"res://Assets/Player_RightHand/PlayerRightHand_2_Decomp_Few.png\")
+var tex_bubbles_many = load(\"res://Assets/Player_RightHand/PlayerRightHand_2_Decomp_Few.png\") # placeholder
+var tex_bubbles_all = load(\"res://Assets/Player_RightHand/PlayerRightHand_2_Decomp_Few.png\") # placeholder
+
+enum Bubbles
+{
+	BUBBLES_NONE = 0,
+	BUBBLES_FEW = 1,
+	BUBBLES_MANY = 2,
+	BUBBLES_ALL = 3,
+}
+
+
+func _ready() -> void:
+	texture = tex_bubbles_none
+
+
+func set_bubbles_state(p_bubbles: Bubbles) -> void:
+	if p_bubbles == Bubbles.BUBBLES_NONE and tex_bubbles_none:
+		texture = tex_bubbles_none
+		return
+	if p_bubbles == Bubbles.BUBBLES_FEW and tex_bubbles_few:
+		texture = tex_bubbles_few
+		return
+	if p_bubbles == Bubbles.BUBBLES_MANY and tex_bubbles_many:
+		texture = tex_bubbles_many
+		return
+	if p_bubbles == Bubbles.BUBBLES_ALL and tex_bubbles_all:
+		texture = tex_bubbles_all
+		$\"../AwaitGameOverTimer\".start
+		return
+	printerr(\"Passed set_bubbles_state an invalid argument or texture is invalid!\")
+"
+
+[sub_resource type="GDScript" id="GDScript_d3jor"]
+script/source = "extends Sprite3D
+
+var tex_barometer_clean := load(\"res://Assets/Player_LeftHand/Player_LeftHand_1_Clean.png\")
+var tex_barometer_cursed := load(\"res://Assets/Player_Meter/Meter_2_Cursed.png\")
+
+var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle.png\")
+
+@onready var offscreen_position := get_position()
+var onscreen_position = Vector3(0., 0., 0.)
+
+var position_tween : Tween = null
+
+
+const FADEIN_DURATION := .5
+const FADEOUT_DURATION := .5
+
+
+func _ready() -> void:
+	texture = tex_barometer_clean
+
+func _process(p_delta: float) -> void:
+	pass
+
+func _input(p_event: InputEvent) -> void:
+	if p_event.is_action_pressed(\"barometer_show\"):
+		if position_tween:
+			position_tween.kill()
+			position_tween = null
+		position_tween = create_tween()
+		position_tween.tween_property(self, \"position\", onscreen_position, FADEIN_DURATION)
+		return
+	if p_event.is_action_released(\"barometer_hide\"):
+		if position_tween:
+			position_tween.kill()
+			position_tween = null
+		position_tween = create_tween()
+		position_tween.tween_property(self, \"position\", offscreen_position, FADEOUT_DURATION)
+		return
+"
+
+[sub_resource type="GDScript" id="GDScript_j4p65"]
+script/source = "extends Sprite3D
+
+
+func set_needle(p_value: float) -> void:
+	rotation.z = clampf(p_value, 0., 1.) * PI - PI / 2.
+"
+
+[sub_resource type="GDScript" id="GDScript_rr2cc"]
+script/source = "extends Node3D
+
+
+var tank_pressure := MAX_TANK_PRESSURE
+
+var nitrogen_saturation := 0.
+
+const MAX_TANK_PRESSURE := 200.
+
+const NITROGEN_SATURATION_RATE := 1. # This value is a factor for the nitrogen_saturation increase/decrease.
+const MAX_NITROGEN_EXCESS := 24. # This valua is used to check for decompression sickness.
+const MAX_NITROGEN_SATURATION := 100. # nitrogen_saturation > MAX_NITROGEN_SATURATION leads to max depth_intoxication.
+
+func _process(p_delta: float) -> void:
+	# TODO: Update tank_pressure depending on the depth!
+	$\"../Camera3D/ArmLeftSprite3D/NeedleSprite3D\".set_needle(tank_pressure / MAX_TANK_PRESSURE)
+
+	nitrogen_saturation = lerp(nitrogen_saturation, global_position.z, p_delta * NITROGEN_SATURATION_RATE)
+
+	var depth_intoxication := nitrogen_saturation / MAX_NITROGEN_SATURATION
+	if randf() < depth_intoxication:
+		do_something_cursed()
+
+	var bubbles_state := int(minf(global_position.z - nitrogen_saturation, 0.) / MAX_NITROGEN_EXCESS)
+	$\"../Camera3D/ArmRightSprite3D\".set_bubbles_state(bubbles_state)
+
+	if bubbles_state >= 3:
+		$\"..\".await_game_over()
+
+# This function shall select a 
+func do_something_cursed() -> void:
+	pass
+"
+
+[node name="PlayerCharacter" type="CharacterBody3D"]
+motion_mode = 1
+script = SubResource("GDScript_25k6p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_xk0f7")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = SubResource("GDScript_p4012")
+
+[node name="ArmRightSprite3D" type="Sprite3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -2.25, -13)
+script = SubResource("GDScript_cqw7g")
+
+[node name="ArmLeftSprite3D" type="Sprite3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -4, -11.5)
+script = SubResource("GDScript_d3jor")
+
+[node name="NeedleSprite3D" type="Sprite3D" parent="Camera3D/ArmLeftSprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+texture = ExtResource("1_7r18b")
+
+[node name="AwaitGameOverTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="StateManagerNode3D" type="Node3D" parent="."]
+script = SubResource("GDScript_rr2cc")
+
+[connection signal="timeout" from="AwaitGameOverTimer" to="." method="_on_await_game_over_timer_timeout"]
