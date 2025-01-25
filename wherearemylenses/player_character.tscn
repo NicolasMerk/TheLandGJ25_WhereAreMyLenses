@@ -15,8 +15,12 @@ script/source = "extends CharacterBody3D
 
 var block_input := false
 
+# 0. - 1.
 var lungs_filled := 0.
+var jacket_filled := .5
 
+const JACKET_FILL_RATE := .5
+const JACKET_EMPTY_RATE := .5
 
 const SWIM_SPEED_FORWARD := 1.
 const SWIM_SPEED_BACKWARD := .1
@@ -92,7 +96,21 @@ func _process(p_delta: float) -> void:
 		velocity -= global_forward_vector * SWIM_SPEED_BACKWARD
 
 	velocity /= WATER_RESISTANCE
-	
+
+
+	if Input.is_action_pressed(\"jacket_up\") and not Input.is_action_pressed(\"jacket_down\") and jacket_filled < 1.:
+		jacket_filled = minf(jacket_filled + p_delta * JACKET_FILL_RATE, 1.)
+		if $AudioStreamPlayersNode/JacketPlayersNode/JacketInPlayer.stream and not $AudioStreamPlayersNode/JacketPlayersNode/JacketInPlayer.playing:
+			$AudioStreamPlayersNode/JacketPlayersNode/JacketInPlayer.play()
+	elif Input.is_action_pressed(\"jacket_down\") and not Input.is_action_pressed(\"jacket_up\") and jacket_filled > 0.:
+		jacket_filled = maxf(jacket_filled - p_delta * JACKET_EMPTY_RATE, 0.)
+		if $AudioStreamPlayersNode/JacketPlayersNode/JacketOutPlayer.stream and not $AudioStreamPlayersNode/JacketPlayersNode/JacketOutPlayer.playing:
+			$AudioStreamPlayersNode/JacketPlayersNode/JacketOutPlayer.play()
+	else:
+		$AudioStreamPlayersNode/JacketPlayersNode/JacketInPlayer.stop()
+		$AudioStreamPlayersNode/JacketPlayersNode/JacketOutPlayer.stop()
+
+
 func _physics_process(p_delta: float) -> void:
 	move_and_slide()
 
@@ -350,8 +368,7 @@ position = Vector2(16, -72)
 script = SubResource("GDScript_j4p65")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
-spot_range = 200.0
-spot_angle = 60.0
+spot_range = 50.0
 spot_angle_attenuation = 1.23114
 
 [node name="AwaitGameOverTimer" type="Timer" parent="."]
@@ -392,6 +409,12 @@ stream = ExtResource("7_ekkdk")
 volume_db = -3.0
 autoplay = true
 script = SubResource("GDScript_4vrav")
+
+[node name="JacketPlayersNode" type="Node" parent="AudioStreamPlayersNode"]
+
+[node name="JacketInPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/JacketPlayersNode"]
+
+[node name="JacketOutPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/JacketPlayersNode"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 amount = 700
