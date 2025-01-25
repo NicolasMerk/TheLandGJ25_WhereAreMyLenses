@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cl068m0bioshk" path="res://Assets/_SoundFiles/Breathing/Exhale2.wav" id="5_rbn80"]
 [ext_resource type="AudioStream" uid="uid://clsl730c22tbq" path="res://Assets/_SoundFiles/Breathing/Exhale3.wav" id="6_1qkdv"]
 [ext_resource type="AudioStream" uid="uid://cygw0d7qxi44k" path="res://Assets/_SoundFiles/Atmo/UnderwaterAtmoV1.wav" id="7_ekkdk"]
-[ext_resource type="Texture2D" uid="uid://b0bbk4svvvtua" path="res://Assets/ParticleAssets/BubbleParticle.png" id="7_ryqxq"]
+[ext_resource type="Texture2D" uid="uid://0drmvr2kc0m" path="res://Assets/ParticleAssets/BubbleParticle.png" id="7_ryqxq"]
 [ext_resource type="AudioStream" uid="uid://dtb28h3gfqio2" path="res://Assets/_SoundFiles/JacketIO/JacketIn.wav" id="8_v6emp"]
 [ext_resource type="AudioStream" uid="uid://mmkidyqpm1w6" path="res://Assets/_SoundFiles/JacketIO/JacketOut.wav" id="9_mslv8"]
 
@@ -118,6 +118,7 @@ func _process(p_delta: float) -> void:
 func _physics_process(p_delta: float) -> void:
 	velocity.z = (lungs_filled + jacket_filled * JACKET_LUNGS_WEIGHT) / 2. - (1. + JACKET_LUNGS_WEIGHT) / 2.
 	move_and_slide()
+	print(global_position.z)
 
 
 # TODO: Make this boi unload world.tscn and open a game over menu!
