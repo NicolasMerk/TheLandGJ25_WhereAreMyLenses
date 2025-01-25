@@ -136,14 +136,6 @@ func _input(p_event: InputEvent) -> void:
 		return
 "
 
-[sub_resource type="GDScript" id="GDScript_j4p65"]
-script/source = "extends Sprite3D
-
-
-func set_needle(p_value: float) -> void:
-	rotation.z = clampf(p_value, 0., 1.) * PI - PI / 2.
-"
-
 [sub_resource type="GDScript" id="GDScript_rr2cc"]
 script/source = "extends Node3D
 
