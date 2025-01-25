@@ -89,29 +89,29 @@ transform = Transform3D(0.951286, 0.026058, -0.307205, -0.297312, -0.186205, -0.
 mesh = SubResource("SphereMesh_e4a3a")
 script = ExtResource("3_si08j")
 
-[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="."]
+[node name="BigPipe" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -77.9104, 0)
 
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D2"]
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="BigPipe"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5496, 37.737, 0)
 radius = 50.5
 height = 80.0
 sides = 64
 
-[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D2"]
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="BigPipe"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5496, 37.737, 0)
 operation = 2
 radius = 47.0
 height = 80.0
 sides = 64
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="Hole" type="CSGCombiner3D" parent="."]
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D"]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Hole"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 275.109)
 mesh = SubResource("PlaneMesh_p4trg")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Hole"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.438, 0, 0)
 operation = 2
 radius = 50.001
