@@ -138,6 +138,12 @@ func _input(p_event: InputEvent) -> void:
 script/source = "extends Sprite3D
 
 
+var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle.png\")
+
+
+func _ready() -> void:
+	texture = tex_needle
+
 func set_needle(p_value: float) -> void:
 	rotation.z = clampf(p_value, 0., 1.) * PI - PI / 2.
 "
