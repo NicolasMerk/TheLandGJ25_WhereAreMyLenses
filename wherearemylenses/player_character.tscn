@@ -189,11 +189,11 @@ shape = SubResource("CapsuleShape3D_xk0f7")
 script = SubResource("GDScript_p4012")
 
 [node name="ArmRightSprite3D" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.496231, -0.135707, -1.46315)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -2.25, -13)
 script = SubResource("GDScript_cqw7g")
 
 [node name="ArmLeftSprite3D" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01576, 0, -1.3685)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -4, -11.5)
 script = SubResource("GDScript_d3jor")
 
 [node name="NeedleSprite3D" type="Sprite3D" parent="Camera3D/ArmLeftSprite3D"]
