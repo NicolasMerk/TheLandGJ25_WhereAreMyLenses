@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://plw2rdcb4qqv"]
+[gd_scene load_steps=8 format=3 uid="uid://plw2rdcb4qqv"]
 
 [sub_resource type="GDScript" id="GDScript_25k6p"]
 script/source = "extends CharacterBody3D
@@ -111,9 +111,6 @@ const FADEIN_DURATION := .5
 const FADEOUT_DURATION := .5
 
 
-func set_needle(p_value: float) -> void:
-	$NeedleSprite3D.rotation.z = clampf(p_value, 0., 1.) * PI - PI / 2.
-
 func _ready() -> void:
 	texture = tex_barometer_clean
 
@@ -135,6 +132,14 @@ func _input(p_event: InputEvent) -> void:
 		position_tween = create_tween()
 		position_tween.tween_property(self, \"position\", offscreen_position, FADEOUT_DURATION)
 		return
+"
+
+[sub_resource type="GDScript" id="GDScript_j4p65"]
+script/source = "extends Sprite3D
+
+
+func set_needle(p_value: float) -> void:
+	rotation.z = clampf(p_value, 0., 1.) * PI - PI / 2.
 "
 
 [sub_resource type="GDScript" id="GDScript_rr2cc"]
@@ -184,15 +189,16 @@ shape = SubResource("CapsuleShape3D_xk0f7")
 script = SubResource("GDScript_p4012")
 
 [node name="ArmRightSprite3D" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.496231, -0.135707, -1.46315)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -2.25, -13)
 script = SubResource("GDScript_cqw7g")
 
 [node name="ArmLeftSprite3D" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01576, 0, -1.3685)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -4, -11.5)
 script = SubResource("GDScript_d3jor")
 
 [node name="NeedleSprite3D" type="Sprite3D" parent="Camera3D/ArmLeftSprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+script = SubResource("GDScript_j4p65")
 
 [node name="AwaitGameOverTimer" type="Timer" parent="."]
 wait_time = 5.0
