@@ -1,10 +1,12 @@
 /*
 	砂嵐エフェクト by あるる（きのもと 結衣）
-	Screen Noise Effect Shader by Yui Kinomoto @arlez80
+	Screen Noise Effect Shader by Yui Kinomoto @arlez80 and Vinni Richburgh
 
 	MIT License
 */
 shader_type canvas_item;
+
+uniform sampler2D screen_texture : hint_screen_texture;
 
 uniform float seed = 81.0;
 uniform float power : hint_range( 0.0, 1.0 ) = 0.03;
@@ -25,5 +27,5 @@ vec2 random( vec2 pos )
 void fragment( )
 {
 	vec2 uv = SCREEN_UV + ( random( UV + vec2( seed - TIME * speed, TIME * speed ) ) - vec2( 0.5, 0.5 ) ) * power;
-	COLOR = textureLod( SCREEN_TEXTURE, uv, 0.0 );
+	COLOR = textureLod( screen_texture, uv, 0.0 );
 }
