@@ -1,4 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://67axyi1xr1bu"]
+[gd_scene load_steps=14 format=3 uid="uid://67axyi1xr1bu"]
+
+[ext_resource type="AudioStream" uid="uid://snyaeyljph1g" path="res://Assets/_SoundFiles/Breathing/Inhale1.wav" id="1_7hkol"]
+[ext_resource type="AudioStream" uid="uid://dpu113clan1fa" path="res://Assets/_SoundFiles/Breathing/Inhale2.wav" id="2_lsj7d"]
+[ext_resource type="AudioStream" uid="uid://gphpj4okwe8i" path="res://Assets/_SoundFiles/Breathing/Inhale3.wav" id="3_4kw60"]
+[ext_resource type="AudioStream" uid="uid://ce6qwrsr05q41" path="res://Assets/_SoundFiles/Breathing/Exhale1.wav" id="4_f8x02"]
+[ext_resource type="AudioStream" uid="uid://cx6bwnbb8t6x7" path="res://Assets/_SoundFiles/Breathing/Exhale2.wav" id="5_rbn80"]
+[ext_resource type="AudioStream" uid="uid://bhg7xgoterd14" path="res://Assets/_SoundFiles/Breathing/Exhale3.wav" id="6_1qkdv"]
 
 [sub_resource type="GDScript" id="GDScript_25k6p"]
 script/source = "extends CharacterBody3D
@@ -6,8 +13,13 @@ script/source = "extends CharacterBody3D
 
 var block_input := false
 
+var lungs_filled := 0.
+
+
 const SWIM_SPEED_FORWARD := 1.
 const SWIM_SPEED_BACKWARD := .1
+
+const BREATHING_SPEED := 1.25
 
 
 func await_game_over() -> void:
@@ -15,8 +27,39 @@ func await_game_over() -> void:
 	$AwaitGameOverTimer.start()
 
 func _input(p_event: InputEvent) -> void:
-	pass
-	# TODO: Check for breathing (in/out) and block breathing in once the tank is empty!
+	if block_input:
+		return
+
+	if p_event.is_action_pressed(\"breathe_in\"):
+		if lungs_filled < 1. and $StateManagerNode3D.tank_pressure > 0.:
+			lungs_filled = minf(lungs_filled + BREATHING_SPEED * get_process_delta_time(), 1.)
+
+			var any_inhale_players_playing := false
+			for inhale_player in $AudioStreamPlayersNode/BreathPlayersNode/InhalePlayersNode.get_children():
+				var cast_to_inhale_player := inhale_player as AudioStreamPlayer
+				if cast_to_inhale_player and cast_to_inhale_player.playing:
+					any_inhale_players_playing = true
+					break
+			if not any_inhale_players_playing:
+				var cast_to_random_inhale_player := $AudioStreamPlayersNode/BreathPlayersNode/InhalePlayersNode.get_children().pick_random() as AudioStreamPlayer
+				if cast_to_random_inhale_player:
+					cast_to_random_inhale_player.play()
+		return
+	if p_event.is_action_pressed(\"breathe_out\"):
+		if lungs_filled > 0.:
+			lungs_filled = maxf(lungs_filled - BREATHING_SPEED * get_process_delta_time(), 0.)
+
+			var any_exhale_player_playing := false
+			for exhale_player in $AudioStreamPlayersNode/BreathPlayersNode/ExhalePlayersNode.get_children():
+				var cast_to_exhale_player := exhale_player as AudioStreamPlayer
+				if cast_to_exhale_player and cast_to_exhale_player.playing:
+					any_exhale_player_playing = true
+					break
+			if not any_exhale_player_playing:
+				var cast_to_random_exhale_player := $AudioStreamPlayersNode/BreathPlayersNode/ExhalePlayersNode.get_children().pick_random() as AudioStreamPlayer
+				if cast_to_random_exhale_player:
+					cast_to_random_exhale_player.play()
+		return
 
 func _process(p_delta: float) -> void:
 	var global_forward_vector := Vector3.FORWARD * transform.basis * p_delta # Can't verify if this works right now.
@@ -216,5 +259,31 @@ one_shot = true
 
 [node name="StateManagerNode3D" type="Node3D" parent="."]
 script = SubResource("GDScript_rr2cc")
+
+[node name="AudioStreamPlayersNode" type="Node" parent="."]
+
+[node name="BreathPlayersNode" type="Node" parent="AudioStreamPlayersNode"]
+
+[node name="InhalePlayersNode" type="Node" parent="AudioStreamPlayersNode/BreathPlayersNode"]
+
+[node name="Inhale0AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/BreathPlayersNode/InhalePlayersNode"]
+stream = ExtResource("1_7hkol")
+
+[node name="Inhale1AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/BreathPlayersNode/InhalePlayersNode"]
+stream = ExtResource("2_lsj7d")
+
+[node name="Inhale2AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/BreathPlayersNode/InhalePlayersNode"]
+stream = ExtResource("3_4kw60")
+
+[node name="ExhalePlayersNode" type="Node" parent="AudioStreamPlayersNode/BreathPlayersNode"]
+
+[node name="Exhale0AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/BreathPlayersNode/ExhalePlayersNode"]
+stream = ExtResource("4_f8x02")
+
+[node name="Exhale1AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/BreathPlayersNode/ExhalePlayersNode"]
+stream = ExtResource("5_rbn80")
+
+[node name="Exhale2AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/BreathPlayersNode/ExhalePlayersNode"]
+stream = ExtResource("6_1qkdv")
 
 [connection signal="timeout" from="AwaitGameOverTimer" to="." method="_on_await_game_over_timer_timeout"]
