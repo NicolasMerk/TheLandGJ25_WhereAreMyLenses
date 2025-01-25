@@ -62,7 +62,7 @@ func _input(p_event: InputEvent) -> void:
 		if lungs_filled < 1. and $StateManagerNode3D.tank_pressure > 0.:
 			lungs_filled = minf(lungs_filled + BREATHING_SPEED * get_process_delta_time(), 1.)
 
-			tank_pressure -= get_process_delta_time()
+			$StateManagerNode3D.tank_pressure -= get_process_delta_time()
 			$StateManagerNode3D.oxygen_saturation = minf(get_process_delta_time(), $StateManagerNode3D.MAX_OXYGEN_SATURATION)
 
 			var any_inhale_players_playing := false
