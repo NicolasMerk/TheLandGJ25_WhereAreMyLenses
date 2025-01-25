@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b4ldqopv3c3it"]
+[gd_scene load_steps=26 format=3 uid="uid://67axyi1xr1bu"]
 
 [ext_resource type="AudioStream" uid="uid://cjfdo2y2uvdnd" path="res://Assets/_SoundFiles/Breathing/Inhale1.wav" id="1_7hkol"]
 [ext_resource type="AudioStream" uid="uid://ngx0lcy5tkva" path="res://Assets/_SoundFiles/Breathing/Inhale2.wav" id="2_lsj7d"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cl068m0bioshk" path="res://Assets/_SoundFiles/Breathing/Exhale2.wav" id="5_rbn80"]
 [ext_resource type="AudioStream" uid="uid://clsl730c22tbq" path="res://Assets/_SoundFiles/Breathing/Exhale3.wav" id="6_1qkdv"]
 [ext_resource type="AudioStream" uid="uid://cygw0d7qxi44k" path="res://Assets/_SoundFiles/Atmo/UnderwaterAtmoV1.wav" id="7_ekkdk"]
+[ext_resource type="Texture2D" uid="uid://b0bbk4svvvtua" path="res://Assets/ParticleAssets/BubbleParticle.png" id="7_ryqxq"]
 
 [sub_resource type="GDScript" id="GDScript_25k6p"]
 script/source = "extends CharacterBody3D
@@ -311,6 +312,7 @@ collision_bounce = 0.07
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdx0s"]
 transparency = 1
 vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("7_ryqxq")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1

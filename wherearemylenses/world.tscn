@@ -1,22 +1,33 @@
-[gd_scene load_steps=13 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=12 format=3 uid="uid://cuowist1iksg3"]
 
-[ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
-[ext_resource type="PackedScene" uid="uid://b4ldqopv3c3it" path="res://player_character.tscn" id="1_35cup"]
+[ext_resource type="Material" path="res://glowing_mcguffin.tres" id="1_1erht"]
+[ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0a3c"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_top_color = Color(0.193272, 0.191842, 0.195542, 1)
+sky_horizon_color = Color(0.121862, 0.128979, 0.134508, 1)
+ground_bottom_color = Color(0.0389677, 0.0585372, 0.0599439, 1)
+ground_horizon_color = Color(0.0152086, 0.0160576, 0.017453, 1)
 
 [sub_resource type="Sky" id="Sky_chrf2"]
 sky_material = SubResource("ProceduralSkyMaterial_e0a3c")
 
 [sub_resource type="Environment" id="Environment_qvvhv"]
-background_mode = 1
-background_color = Color(0.356863, 0.239216, 0.239216, 1)
+background_mode = 2
 sky = SubResource("Sky_chrf2")
-tonemap_mode = 2
+tonemap_mode = 3
+sdfgi_enabled = true
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.4
+volumetric_fog_albedo = Color(0.263557, 0.325745, 0.299332, 1)
+volumetric_fog_emission_energy = 0.1
+volumetric_fog_length = 128.0
+adjustment_enabled = true
+adjustment_brightness = 1.35
+adjustment_contrast = 1.2
+adjustment_saturation = 0.01
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_cbc88"]
 size = Vector2(1500, 1500)
@@ -29,9 +40,6 @@ inner_radius = 7.326
 outer_radius = 11.275
 
 [sub_resource type="BoxMesh" id="BoxMesh_a2nwf"]
-size = Vector3(160, 1, 160)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_wdvkf"]
 size = Vector3(160, 1, 160)
 
 [sub_resource type="SphereMesh" id="SphereMesh_e4a3a"]
@@ -65,35 +73,11 @@ shape = SubResource("BoxShape3D_e1ac4")
 transform = Transform3D(1, 0, 0, 0, 0.18877, -0.982021, 0, 0.982021, 0.18877, 6.34686, 10.5538, -13.0231)
 mesh = SubResource("TorusMesh_12656")
 
-[node name="Wall1" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall1"]
-transform = Transform3D(0.0358018, -0.77344, -0.632856, -0.447772, 0.553724, -0.702061, 0.893431, 0.30851, -0.3265, -35.4808, -20.1392, -18.9289)
+[node name="Wall1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0358018, -0.77344, -0.632856, -0.447772, 0.553724, -0.702061, 0.893431, 0.30851, -0.3265, 0, -20.1392, -18.9289)
 mesh = SubResource("BoxMesh_a2nwf")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall1"]
-transform = Transform3D(0.0358018, -0.77344, -0.632856, -0.447772, 0.553724, -0.702061, 0.893431, 0.30851, -0.3265, -35.4808, -20.1392, -18.9289)
-shape = SubResource("BoxShape3D_wdvkf")
-
-[node name="Wall2" type="StaticBody3D" parent="."]
-transform = Transform3D(0.314556, 0.949239, 0, -0.949239, 0.314556, 0, 0, 0, 1, -97.9396, -144.876, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2"]
-transform = Transform3D(0.0358018, -0.77344, -0.632856, -0.447772, 0.553724, -0.702061, 0.893431, 0.30851, -0.3265, -35.4808, -20.1392, -18.9289)
-mesh = SubResource("BoxMesh_a2nwf")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2"]
-transform = Transform3D(0.0358018, -0.77344, -0.632856, -0.447772, 0.553724, -0.702061, 0.893431, 0.30851, -0.3265, -35.4808, -20.1392, -18.9289)
-shape = SubResource("BoxShape3D_wdvkf")
 
 [node name="GlowingMcGuffin" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.935561, 0.0168949, -0.35276, -0.343607, -0.187259, -0.920254, -0.0816053, 0.982165, -0.169387, -596.671, -456.397, 15.7853)
+transform = Transform3D(0.935561, 0.0168949, -0.35276, -0.343607, -0.187259, -0.920254, -0.0816053, 0.982165, -0.169387, -182.615, -79.3989, 15.7853)
 mesh = SubResource("SphereMesh_e4a3a")
 script = ExtResource("2_2qduu")
-
-[node name="Transition1" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -531.608, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Transition1"]
