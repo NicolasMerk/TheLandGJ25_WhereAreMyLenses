@@ -241,6 +241,8 @@ func set_needle(p_value: float) -> void:
 "
 
 [sub_resource type="QuadMesh" id="QuadMesh_mnx5b"]
+flip_faces = true
+size = Vector2(2, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h8ys2"]
 shader = ExtResource("1_eqtnb")
@@ -382,10 +384,12 @@ position = Vector2(16, -72)
 script = SubResource("GDScript_j4p65")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+visible = false
 spot_range = 39.832
 spot_angle_attenuation = 1.23114
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(-0.99973, 0, -0.0232456, 0, 1, 0, 0.0232456, 0, -0.99973, 0, 0, -0.206137)
 mesh = SubResource("QuadMesh_mnx5b")
 surface_material_override/0 = SubResource("ShaderMaterial_h8ys2")
 
