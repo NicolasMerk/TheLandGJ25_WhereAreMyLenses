@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4ldqopv3c3it"]
+[gd_scene load_steps=8 format=3 uid="uid://67axyi1xr1bu"]
 
 [sub_resource type="GDScript" id="GDScript_25k6p"]
 script/source = "extends CharacterBody3D
@@ -6,44 +6,25 @@ script/source = "extends CharacterBody3D
 
 var block_input := false
 
-const SWIM_SPEED_FORWARD := 2.
+const SWIM_SPEED_FORWARD := 1.
 const SWIM_SPEED_BACKWARD := .1
-const WATER_RESISTANCE := 1.18
 
-@export var MOUSE_SENSITIVITY := 0.005
-@export var MOUSE_ACCELERATION := 50.
-
-
-
-var rotation_target_player : float
 
 func await_game_over() -> void:
 	block_input = true
 	$AwaitGameOverTimer.start()
 
-func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
-
 func _input(p_event: InputEvent) -> void:
-	if p_event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		rotation.y -= p_event.relative.x * MOUSE_SENSITIVITY
-		$Camera3D.rotation.x -= p_event.relative.y * MOUSE_SENSITIVITY
-		
+	pass
 	# TODO: Check for breathing (in/out) and block breathing in once the tank is empty!
 
 func _process(p_delta: float) -> void:
-	var global_forward_vector := Vector3.FORWARD.rotated(Vector3(0., 1., 0.), rotation.y)
-	if not global_forward_vector.is_zero_approx():
-		global_forward_vector = global_forward_vector.normalized()
-	
+	var global_forward_vector := Vector3.FORWARD * transform.basis * p_delta # Can't verify if this works right now.
 	if Input.is_action_pressed(\"forward\"):
 		velocity += global_forward_vector * SWIM_SPEED_FORWARD
 	elif Input.is_action_pressed(\"backward\"):
 		velocity -= global_forward_vector * SWIM_SPEED_BACKWARD
 
-	velocity /= WATER_RESISTANCE
-	
 func _physics_process(p_delta: float) -> void:
 	move_and_slide()
 
@@ -64,14 +45,13 @@ var time_passed := 0.
 
 const ROTATION_SPEED := 1.
 
+func _process(p_delta: float) -> void:
+	time_passed += p_delta
 
-#func _process(p_delta: float) -> void:
-	#time_passed += p_delta
-#
-	#rotation_amplitude = $\"..\".velocity.length() / 10.
-	#rotation_amplitude = clampf(rotation_amplitude, 0., 1.)
-#
-	#rotation.z = sin(time_passed * ROTATION_SPEED) * rotation_amplitude
+	rotation_amplitude += $\"..\".velocity.length()
+	rotation_amplitude = clampf(rotation_amplitude, 0., 1.)
+
+	rotation.z = sin(time_passed * ROTATION_SPEED) * rotation_amplitude
 "
 
 [sub_resource type="GDScript" id="GDScript_cqw7g"]
@@ -158,7 +138,7 @@ func _input(p_event: InputEvent) -> void:
 script/source = "extends Sprite2D
 
 
-var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle.png\")
+var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle_V2.png\")
 
 
 func _ready() -> void:
@@ -183,7 +163,7 @@ const MAX_NITROGEN_EXCESS := 24. # This valua is used to check for decompression
 const MAX_NITROGEN_SATURATION := 100. # nitrogen_saturation > MAX_NITROGEN_SATURATION leads to max depth_intoxication.
 
 func _process(p_delta: float) -> void:
-	# TODO: Update tank_pressure depending on the depth!
+	tank_pressure -= p_delta * 5.
 	$\"../Camera3D/CanvasLayer/ArmLeftSprite2D/NeedleSprite2D\".set_needle(tank_pressure / MAX_TANK_PRESSURE)
 
 	nitrogen_saturation = lerp(nitrogen_saturation, global_position.z, p_delta * NITROGEN_SATURATION_RATE)
@@ -227,7 +207,7 @@ scale = Vector2(0.375, 0.375)
 script = SubResource("GDScript_d3jor")
 
 [node name="NeedleSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer/ArmLeftSprite2D"]
-position = Vector2(-8, -72)
+position = Vector2(16, -72)
 script = SubResource("GDScript_j4p65")
 
 [node name="AwaitGameOverTimer" type="Timer" parent="."]
