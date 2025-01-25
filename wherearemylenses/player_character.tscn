@@ -21,18 +21,18 @@ var block_input := false
 var lungs_filled := 0.
 var jacket_filled := .5
 
-const JACKET_FILL_RATE := .5
-const JACKET_EMPTY_RATE := .5
+@export var JACKET_FILL_RATE := .5
+@export var JACKET_EMPTY_RATE := .5
 const JACKET_LUNGS_WEIGHT := 3.5
+@export var FALLSPEED := 1.
 
-const SWIM_SPEED_FORWARD := 0.5
+@export var SWIM_SPEED_FORWARD := 0.5
 const SWIM_SPEED_BACKWARD := .1
 const WATER_RESISTANCE := 1.18
 
 @export var MOUSE_SENSITIVITY := 0.005
 @export var MOUSE_ACCELERATION := 50.
-@export var SPEED := 5.0
-@export var ACCEL := 50.0
+
 const BREATHING_SPEED := 1.25
 
 
@@ -116,6 +116,7 @@ func _process(p_delta: float) -> void:
 
 func _physics_process(p_delta: float) -> void:
 	velocity.y = (lungs_filled + jacket_filled * JACKET_LUNGS_WEIGHT) - (1. + JACKET_LUNGS_WEIGHT) / 2.
+	velocity.y *= FALLSPEED
 	move_and_slide()
 
 
@@ -351,6 +352,10 @@ material = SubResource("StandardMaterial3D_vdx0s")
 [node name="PlayerCharacter" type="CharacterBody3D"]
 motion_mode = 1
 script = SubResource("GDScript_25k6p")
+JACKET_FILL_RATE = 20.0
+JACKET_EMPTY_RATE = 100.0
+FALLSPEED = 10.0
+SWIM_SPEED_FORWARD = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
