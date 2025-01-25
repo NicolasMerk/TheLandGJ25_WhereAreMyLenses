@@ -4,3 +4,5 @@
 transparency = 1
 no_depth_test = true
 shading_mode = 0
+disable_fog = true
+refraction_enabled = true
