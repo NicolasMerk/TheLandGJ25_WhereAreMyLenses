@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cuowist1iksg3"]
 
-[ext_resource type="PackedScene" uid="uid://4h7txwaun5q1" path="res://basic_fps_player.tscn" id="1_088cv"]
+[ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0a3c"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -46,8 +46,6 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_e1ac4")
 
-[node name="Basic FPS Player" parent="." instance=ExtResource("1_088cv")]
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.18877, -0.982021, 0, 0.982021, 0.18877, 41.6771, 6.64713, 0)
 mesh = SubResource("TorusMesh_12656")
@@ -55,3 +53,5 @@ mesh = SubResource("TorusMesh_12656")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.935561, 0.0168949, -0.35276, -0.343607, -0.187259, -0.920254, -0.0816053, 0.982165, -0.169387, 0, 4.73464, 15.7853)
 mesh = SubResource("BoxMesh_hg074")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
