@@ -5,9 +5,10 @@
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0a3c"]
-sky_top_color = Color(0.0971068, 0.311448, 0.523754, 1)
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_top_color = Color(0.193272, 0.191842, 0.195542, 1)
+sky_horizon_color = Color(0.121862, 0.128979, 0.134508, 1)
+ground_bottom_color = Color(0.0389677, 0.0585372, 0.0599439, 1)
+ground_horizon_color = Color(0.0152086, 0.0160576, 0.017453, 1)
 
 [sub_resource type="Sky" id="Sky_chrf2"]
 sky_material = SubResource("ProceduralSkyMaterial_e0a3c")
@@ -15,8 +16,18 @@ sky_material = SubResource("ProceduralSkyMaterial_e0a3c")
 [sub_resource type="Environment" id="Environment_qvvhv"]
 background_mode = 2
 sky = SubResource("Sky_chrf2")
-tonemap_mode = 2
+tonemap_mode = 3
+sdfgi_enabled = true
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.4
+volumetric_fog_albedo = Color(0.263557, 0.325745, 0.299332, 1)
+volumetric_fog_emission_energy = 0.1
+volumetric_fog_length = 128.0
+adjustment_enabled = true
+adjustment_brightness = 1.35
+adjustment_contrast = 1.2
+adjustment_saturation = 0.01
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_cbc88"]
 size = Vector2(1500, 1500)
