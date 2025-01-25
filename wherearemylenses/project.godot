@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="WhereAreMyLenses"
+run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="WhereAreMyLenses"
 
 [editor_plugins]
 
