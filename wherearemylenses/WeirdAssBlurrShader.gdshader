@@ -27,5 +27,5 @@ vec2 random( vec2 pos )
 void fragment( )
 {
 	vec2 uv = SCREEN_UV + ( random( UV + vec2( seed - TIME * speed, TIME * speed ) ) - vec2( 0.5, 0.5 ) ) * power;
-	COLOR = textureLod( screen_texture, uv, 0.0 );
+	COLOR.rgb = texture( screen_texture, uv ).rgb;
 }
