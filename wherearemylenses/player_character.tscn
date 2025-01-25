@@ -55,7 +55,7 @@ func _process(p_delta: float) -> void:
 "
 
 [sub_resource type="GDScript" id="GDScript_cqw7g"]
-script/source = "extends Sprite3D
+script/source = "extends Sprite2D
 
 
 var tex_bubbles_none = load(\"res://Assets/Player_RightHand/PlayerRightHand_1_Clean_Open.png\")
@@ -88,13 +88,13 @@ func set_bubbles_state(p_bubbles: Bubbles) -> void:
 		return
 	if p_bubbles == Bubbles.BUBBLES_ALL and tex_bubbles_all:
 		texture = tex_bubbles_all
-		$\"../AwaitGameOverTimer\".start
+		$\"../../AwaitGameOverTimer\".start
 		return
 	printerr(\"Passed set_bubbles_state an invalid argument or texture is invalid!\")
 "
 
 [sub_resource type="GDScript" id="GDScript_d3jor"]
-script/source = "extends Sprite3D
+script/source = "extends Sprite2D
 
 var tex_barometer_clean := load(\"res://Assets/Player_LeftHand/Player_LeftHand_1_Clean.png\")
 var tex_barometer_cursed := load(\"res://Assets/Player_Meter/Meter_2_Cursed.png\")
@@ -102,7 +102,7 @@ var tex_barometer_cursed := load(\"res://Assets/Player_Meter/Meter_2_Cursed.png\
 var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle.png\")
 
 @onready var offscreen_position := get_position()
-var onscreen_position = Vector3(12., -4., -11.5)
+var onscreen_position = Vector2(120., 475.)
 
 var position_tween : Tween = null
 
@@ -118,14 +118,14 @@ func _process(p_delta: float) -> void:
 	pass
 
 func _input(p_event: InputEvent) -> void:
-	if p_event.is_action_pressed(\"barometer_show\"):
+	if p_event.is_action_pressed(\"finimeter_visibility\"):
 		if position_tween:
 			position_tween.kill()
 			position_tween = null
 		position_tween = create_tween()
 		position_tween.tween_property(self, \"position\", onscreen_position, FADEIN_DURATION)
 		return
-	if p_event.is_action_released(\"barometer_hide\"):
+	if p_event.is_action_released(\"finimeter_visibility\"):
 		if position_tween:
 			position_tween.kill()
 			position_tween = null
@@ -135,7 +135,7 @@ func _input(p_event: InputEvent) -> void:
 "
 
 [sub_resource type="GDScript" id="GDScript_j4p65"]
-script/source = "extends Sprite3D
+script/source = "extends Sprite2D
 
 
 var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle.png\")
@@ -145,7 +145,7 @@ func _ready() -> void:
 	texture = tex_needle
 
 func set_needle(p_value: float) -> void:
-	rotation.z = clampf(p_value, 0., 1.) * PI - PI / 2.
+	rotation = clampf(p_value, 0., 1.) * PI - PI / 2.
 "
 
 [sub_resource type="GDScript" id="GDScript_rr2cc"]
@@ -164,7 +164,7 @@ const MAX_NITROGEN_SATURATION := 100. # nitrogen_saturation > MAX_NITROGEN_SATUR
 
 func _process(p_delta: float) -> void:
 	# TODO: Update tank_pressure depending on the depth!
-	$\"../Camera3D/ArmLeftSprite3D/NeedleSprite3D\".set_needle(tank_pressure / MAX_TANK_PRESSURE)
+	$\"../Camera3D/CanvasLayer/ArmLeftSprite2D/NeedleSprite2D\".set_needle(tank_pressure / MAX_TANK_PRESSURE)
 
 	nitrogen_saturation = lerp(nitrogen_saturation, global_position.z, p_delta * NITROGEN_SATURATION_RATE)
 
@@ -173,7 +173,7 @@ func _process(p_delta: float) -> void:
 		do_something_cursed()
 
 	var bubbles_state := int(minf(global_position.z - nitrogen_saturation, 0.) / MAX_NITROGEN_EXCESS)
-	$\"../Camera3D/ArmRightSprite3D\".set_bubbles_state(bubbles_state)
+	$\"../Camera3D/CanvasLayer/ArmRightSprite2D\".set_bubbles_state(bubbles_state)
 
 	if bubbles_state >= 3:
 		$\"..\".await_game_over()
@@ -194,16 +194,19 @@ shape = SubResource("CapsuleShape3D_xk0f7")
 [node name="Camera3D" type="Camera3D" parent="."]
 script = SubResource("GDScript_p4012")
 
-[node name="ArmRightSprite3D" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -2.25, -13)
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
+[node name="ArmRightSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer"]
+position = Vector2(1050, 475)
+scale = Vector2(0.375, 0.375)
 script = SubResource("GDScript_cqw7g")
 
-[node name="ArmLeftSprite3D" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -13.5, -11.5)
+[node name="ArmLeftSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer"]
+position = Vector2(120, 950)
+scale = Vector2(0.375, 0.375)
 script = SubResource("GDScript_d3jor")
 
-[node name="NeedleSprite3D" type="Sprite3D" parent="Camera3D/ArmLeftSprite3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+[node name="NeedleSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer/ArmLeftSprite2D"]
 script = SubResource("GDScript_j4p65")
 
 [node name="AwaitGameOverTimer" type="Timer" parent="."]
