@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dauwq2ms3546s"
-path="res://.godot/imported/Basic FPS Player.png-0760118432058d9ff43f455711584e15.ctex"
+uid="uid://b1yoblblxhqds"
+path="res://.godot/imported/Landlord_Cursed_3_NIGHTMARE.png-6658a3f90bda1aa788084dc4167939d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/Basic FPS Player/Assets/Basic FPS Player.png"
-dest_files=["res://.godot/imported/Basic FPS Player.png-0760118432058d9ff43f455711584e15.ctex"]
+source_file="res://Assets/Landlord/Landlord_Cursed_3_NIGHTMARE.png"
+dest_files=["res://.godot/imported/Landlord_Cursed_3_NIGHTMARE.png-6658a3f90bda1aa788084dc4167939d8.ctex"]
 
 [params]
 
