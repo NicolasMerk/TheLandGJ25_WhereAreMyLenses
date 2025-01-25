@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0a3c"]
+sky_top_color = Color(0.0971068, 0.311448, 0.523754, 1)
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
