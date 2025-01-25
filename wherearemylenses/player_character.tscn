@@ -104,7 +104,7 @@ var tex_barometer_cursed := load(\"res://Assets/Player_Meter/Meter_2_Cursed.png\
 var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle.png\")
 
 @onready var offscreen_position := get_position()
-var onscreen_position = Vector3(0., 0., 0.)
+var onscreen_position = Vector3(12., -4., -11.5)
 
 var position_tween : Tween = null
 
@@ -134,6 +134,20 @@ func _input(p_event: InputEvent) -> void:
 		position_tween = create_tween()
 		position_tween.tween_property(self, \"position\", offscreen_position, FADEOUT_DURATION)
 		return
+"
+
+[sub_resource type="GDScript" id="GDScript_j4p65"]
+script/source = "extends Sprite3D
+
+
+var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle.png\")
+
+
+func _ready() -> void:
+	texture = tex_needle
+
+func set_needle(p_value: float) -> void:
+	rotation.z = clampf(p_value, 0., 1.) * PI - PI / 2.
 "
 
 [sub_resource type="GDScript" id="GDScript_rr2cc"]
@@ -187,7 +201,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -2.25, -13)
 script = SubResource("GDScript_cqw7g")
 
 [node name="ArmLeftSprite3D" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -4, -11.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, -13.5, -11.5)
 script = SubResource("GDScript_d3jor")
 
 [node name="NeedleSprite3D" type="Sprite3D" parent="Camera3D/ArmLeftSprite3D"]
