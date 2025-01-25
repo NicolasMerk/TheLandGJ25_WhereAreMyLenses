@@ -116,9 +116,8 @@ func _process(p_delta: float) -> void:
 
 
 func _physics_process(p_delta: float) -> void:
-	velocity.z = (lungs_filled + jacket_filled * JACKET_LUNGS_WEIGHT) - (1. + JACKET_LUNGS_WEIGHT) / 2.
+	velocity.y = (lungs_filled + jacket_filled * JACKET_LUNGS_WEIGHT) - (1. + JACKET_LUNGS_WEIGHT) / 2.
 	move_and_slide()
-	print(global_position.z)
 
 
 # TODO: Make this boi unload world.tscn and open a game over menu!
