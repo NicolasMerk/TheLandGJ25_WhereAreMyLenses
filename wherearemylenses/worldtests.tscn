@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3b6754bgecqt"]
+[gd_scene load_steps=12 format=3 uid="uid://d3b6754bgecqt"]
 
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_frhug"]
+[ext_resource type="Environment" uid="uid://b3b7x8yhw6j5k" path="res://world_environment.tres" id="1_k4v0v"]
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="3_si08j"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_cbc88"]
@@ -29,11 +30,16 @@ material = SubResource("StandardMaterial3D_dq21t")
 radius = 20.0
 height = 40.0
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_p4trg"]
+size = Vector2(800, 800)
+
 [node name="World" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_k4v0v")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_frhug")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3485, 0, 0)
 motion_mode = 0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -55,6 +61,7 @@ transform = Transform3D(1, 0, 0, 0, 0.18877, -0.982021, 0, 0.982021, 0.18877, 6.
 mesh = SubResource("TorusMesh_12656")
 
 [node name="Wall1" type="StaticBody3D" parent="."]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Wall1"]
 transform = Transform3D(0.0358018, -0.77344, -0.632856, -0.447772, 0.553724, -0.702061, 0.893431, 0.30851, -0.3265, -2.27374e-13, -20.1392, -18.9289)
@@ -82,7 +89,30 @@ transform = Transform3D(0.951286, 0.026058, -0.307205, -0.297312, -0.186205, -0.
 mesh = SubResource("SphereMesh_e4a3a")
 script = ExtResource("3_si08j")
 
-[node name="GlowingMcGuffin2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.935561, 0.0168949, -0.35276, -0.343607, -0.187259, -0.920254, -0.0816053, 0.982165, -0.169387, -378.921, -1257.21, 15.7853)
-mesh = SubResource("SphereMesh_e4a3a")
-script = ExtResource("3_si08j")
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -77.9104, 0)
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5496, 37.737, 0)
+radius = 50.5
+height = 80.0
+sides = 64
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5496, 37.737, 0)
+operation = 2
+radius = 47.0
+height = 80.0
+sides = 64
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 275.109)
+mesh = SubResource("PlaneMesh_p4trg")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.438, 0, 0)
+operation = 2
+radius = 50.001
+sides = 64
