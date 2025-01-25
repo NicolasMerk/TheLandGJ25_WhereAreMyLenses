@@ -42,6 +42,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="Floor" type="StaticBody3D" parent="."]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("PlaneMesh_cbc88")
@@ -51,7 +52,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_e1ac4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.18877, -0.982021, 0, 0.982021, 0.18877, 6.34686, 6.64713, -13.0231)
+transform = Transform3D(1, 0, 0, 0, 0.18877, -0.982021, 0, 0.982021, 0.18877, 6.34686, 10.5538, -13.0231)
 mesh = SubResource("TorusMesh_12656")
 
 [node name="GlowingMcGuffin" type="MeshInstance3D" parent="."]

@@ -6,14 +6,13 @@ script/source = "extends CharacterBody3D
 
 var block_input := false
 
-const SWIM_SPEED_FORWARD := 1.
+const SWIM_SPEED_FORWARD := 2.
 const SWIM_SPEED_BACKWARD := .1
 const WATER_RESISTANCE := 1.18
 
 @export var MOUSE_SENSITIVITY := 0.005
 @export var MOUSE_ACCELERATION := 50.
-@export var SPEED := 5.0
-@export var ACCEL := 50.0
+
 
 
 var rotation_target_player : float
