@@ -62,6 +62,9 @@ func _input(p_event: InputEvent) -> void:
 		if lungs_filled < 1. and $StateManagerNode3D.tank_pressure > 0.:
 			lungs_filled = minf(lungs_filled + BREATHING_SPEED * get_process_delta_time(), 1.)
 
+			tank_pressure -= get_process_delta_time()
+			$StateManagerNode3D.oxygen_saturation = minf(get_process_delta_time(), $StateManagerNode3D.MAX_OXYGEN_SATURATION)
+
 			var any_inhale_players_playing := false
 			for inhale_player in $AudioStreamPlayersNode/BreathPlayersNode/InhalePlayersNode.get_children():
 				var cast_to_inhale_player := inhale_player as AudioStreamPlayer
@@ -258,6 +261,8 @@ script/source = "extends Node3D
 var tank_pressure := MAX_TANK_PRESSURE
 
 var nitrogen_saturation := 0.
+var oxygen_saturation := MAX_OXYGEN_SATURATION
+var oxygen_consumption_factor := 1.
 
 const MAX_TANK_PRESSURE := 200.
 
@@ -265,8 +270,9 @@ const NITROGEN_SATURATION_RATE := 1. # This value is a factor for the nitrogen_s
 const MAX_NITROGEN_EXCESS := 24. # This valua is used to check for decompression sickness.
 const MAX_NITROGEN_SATURATION := 100. # nitrogen_saturation > MAX_NITROGEN_SATURATION leads to max depth_intoxication.
 
+const MAX_OXYGEN_SATURATION := 21.
+
 func _process(p_delta: float) -> void:
-	tank_pressure -= p_delta * 5.
 	$\"../Camera3D/CanvasLayer/ArmLeftSprite2D/NeedleSprite2D\".set_needle(tank_pressure / MAX_TANK_PRESSURE)
 
 	nitrogen_saturation = lerp(nitrogen_saturation, global_position.z, p_delta * NITROGEN_SATURATION_RATE)
@@ -278,7 +284,9 @@ func _process(p_delta: float) -> void:
 	var bubbles_state := int(minf(global_position.z - nitrogen_saturation, 0.) / MAX_NITROGEN_EXCESS)
 	$\"../Camera3D/CanvasLayer/ArmRightSprite2D\".set_bubbles_state(bubbles_state)
 
-	if bubbles_state >= 3:
+	oxygen_saturation -= p_delta * oxygen_consumption_factor
+
+	if bubbles_state >= 3 or oxygen_saturation <= 0.:
 		$\"..\".await_game_over()
 
 # This function shall select a 
