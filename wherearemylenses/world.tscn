@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=10 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
+[ext_resource type="Environment" uid="uid://d0n8861x8mvs1" path="res://world_environment.tres" id="4_fl53m"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_cbc88"]
 size = Vector2(1500, 1500)
@@ -23,6 +24,9 @@ radius = 20.0
 height = 40.0
 
 [node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_fl53m")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
 motion_mode = 0
