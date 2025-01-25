@@ -49,6 +49,10 @@ mesh = SubResource("TorusMesh_12656")
 transform = Transform3D(0.0358018, -0.77344, -0.632856, -0.447772, 0.553724, -0.702061, 0.893431, 0.30851, -0.3265, 0, -20.1392, -18.9289)
 mesh = SubResource("BoxMesh_a2nwf")
 
+[node name="Wall2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0358018, -0.77344, -0.632856, -0.447772, 0.553724, -0.702061, 0.893431, 0.30851, -0.3265, 0, -300.174, -18.929)
+mesh = SubResource("BoxMesh_a2nwf")
+
 [node name="GlowingMcGuffin" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.935561, 0.0168949, -0.35276, -0.343607, -0.187259, -0.920254, -0.0816053, 0.982165, -0.169387, -182.615, -79.3989, 15.7853)
 mesh = SubResource("SphereMesh_e4a3a")
