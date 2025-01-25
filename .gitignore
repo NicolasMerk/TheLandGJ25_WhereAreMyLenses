@@ -16,3 +16,6 @@ mono_crash.*.json
 
 # MacOS
 .DS_Store
+
+# Vinnis computer is sick of your *.import files.
+**.import
