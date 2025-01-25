@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b4ldqopv3c3it"]
+[gd_scene load_steps=25 format=3 uid="uid://b4ldqopv3c3it"]
 
 [ext_resource type="AudioStream" uid="uid://cjfdo2y2uvdnd" path="res://Assets/_SoundFiles/Breathing/Inhale1.wav" id="1_7hkol"]
 [ext_resource type="AudioStream" uid="uid://ngx0lcy5tkva" path="res://Assets/_SoundFiles/Breathing/Inhale2.wav" id="2_lsj7d"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://c0bw0nybpc1vg" path="res://Assets/_SoundFiles/Breathing/Exhale1.wav" id="4_f8x02"]
 [ext_resource type="AudioStream" uid="uid://cl068m0bioshk" path="res://Assets/_SoundFiles/Breathing/Exhale2.wav" id="5_rbn80"]
 [ext_resource type="AudioStream" uid="uid://clsl730c22tbq" path="res://Assets/_SoundFiles/Breathing/Exhale3.wav" id="6_1qkdv"]
+[ext_resource type="AudioStream" uid="uid://cygw0d7qxi44k" path="res://Assets/_SoundFiles/Atmo/UnderwaterAtmoV1.wav" id="7_ekkdk"]
 
 [sub_resource type="GDScript" id="GDScript_25k6p"]
 script/source = "extends CharacterBody3D
@@ -250,6 +251,75 @@ func do_something_cursed() -> void:
 	pass
 "
 
+[sub_resource type="GDScript" id="GDScript_4vrav"]
+script/source = "extends AudioStreamPlayer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_finished() -> void:
+	play()
+"
+
+[sub_resource type="Gradient" id="Gradient_e6npd"]
+offsets = PackedFloat32Array(0, 0.333333)
+colors = PackedColorArray(0, 0, 0, 0.0156863, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5qmlk"]
+gradient = SubResource("Gradient_e6npd")
+
+[sub_resource type="Curve" id="Curve_nr7uf"]
+max_value = 50.0
+_data = [Vector2(0, 50), 0.0, 0.0, 0, 0, Vector2(1, 0), -114.849, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_d26fb"]
+curve = SubResource("Curve_nr7uf")
+
+[sub_resource type="Curve" id="Curve_fa2ft"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.339424), -2.69055, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e2b0i"]
+curve = SubResource("Curve_fa2ft")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xxm07"]
+emission_shape = 3
+emission_box_extents = Vector3(50, 50, 50)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = 30.0
+angular_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_e2b0i")
+color_ramp = SubResource("GradientTexture1D_5qmlk")
+emission_curve = SubResource("CurveTexture_d26fb")
+turbulence_enabled = true
+turbulence_noise_scale = 5.053
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.07
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdx0s"]
+transparency = 1
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_rp6hd"]
+material = SubResource("StandardMaterial3D_vdx0s")
+
 [node name="PlayerCharacter" type="CharacterBody3D"]
 motion_mode = 1
 script = SubResource("GDScript_25k6p")
@@ -276,6 +346,11 @@ script = SubResource("GDScript_d3jor")
 [node name="NeedleSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer/ArmLeftSprite2D"]
 position = Vector2(16, -72)
 script = SubResource("GDScript_j4p65")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+spot_range = 200.0
+spot_angle = 60.0
+spot_angle_attenuation = 1.23114
 
 [node name="AwaitGameOverTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -310,4 +385,18 @@ stream = ExtResource("5_rbn80")
 [node name="Exhale2AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode/BreathPlayersNode/ExhalePlayersNode"]
 stream = ExtResource("6_1qkdv")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode"]
+stream = ExtResource("7_ekkdk")
+volume_db = -3.0
+autoplay = true
+script = SubResource("GDScript_4vrav")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 700
+lifetime = 10.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_xxm07")
+draw_pass_1 = SubResource("QuadMesh_rp6hd")
+
 [connection signal="timeout" from="AwaitGameOverTimer" to="." method="_on_await_game_over_timer_timeout"]
+[connection signal="finished" from="AudioStreamPlayersNode/AudioStreamPlayer" to="AudioStreamPlayersNode/AudioStreamPlayer" method="_on_finished"]
