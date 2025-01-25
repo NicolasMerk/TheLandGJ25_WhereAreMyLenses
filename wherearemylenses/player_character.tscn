@@ -207,6 +207,7 @@ scale = Vector2(0.375, 0.375)
 script = SubResource("GDScript_d3jor")
 
 [node name="NeedleSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer/ArmLeftSprite2D"]
+position = Vector2(-8, -72)
 script = SubResource("GDScript_j4p65")
 
 [node name="AwaitGameOverTimer" type="Timer" parent="."]
