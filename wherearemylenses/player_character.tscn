@@ -21,6 +21,7 @@ var jacket_filled := .5
 
 const JACKET_FILL_RATE := .5
 const JACKET_EMPTY_RATE := .5
+const JACKET_LUNGS_WEIGHT := 3.5
 
 const SWIM_SPEED_FORWARD := 1.
 const SWIM_SPEED_BACKWARD := .1
@@ -112,6 +113,7 @@ func _process(p_delta: float) -> void:
 
 
 func _physics_process(p_delta: float) -> void:
+	velocity.z = (lungs_filled + jacket_filled * JACKET_LUNGS_WEIGHT) / 2. - (1. + JACKET_LUNGS_WEIGHT) / 2.
 	move_and_slide()
 
 
