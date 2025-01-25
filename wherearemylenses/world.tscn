@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=12 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
 [ext_resource type="PackedScene" uid="uid://b4ldqopv3c3it" path="res://player_character.tscn" id="1_35cup"]
@@ -27,6 +27,9 @@ size = Vector3(1500, 1, 1500)
 inner_radius = 7.326
 outer_radius = 11.275
 
+[sub_resource type="BoxMesh" id="BoxMesh_a2nwf"]
+size = Vector3(160, 1, 160)
+
 [sub_resource type="SphereMesh" id="SphereMesh_e4a3a"]
 material = ExtResource("1_1erht")
 radius = 20.0
@@ -54,6 +57,10 @@ shape = SubResource("BoxShape3D_e1ac4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.18877, -0.982021, 0, 0.982021, 0.18877, 6.34686, 10.5538, -13.0231)
 mesh = SubResource("TorusMesh_12656")
+
+[node name="Wall1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0358018, -0.77344, -0.632856, -0.447772, 0.553724, -0.702061, 0.893431, 0.30851, -0.3265, 0, -20.1392, -18.9289)
+mesh = SubResource("BoxMesh_a2nwf")
 
 [node name="GlowingMcGuffin" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.935561, 0.0168949, -0.35276, -0.343607, -0.187259, -0.920254, -0.0816053, 0.982165, -0.169387, -182.615, -79.3989, 15.7853)
