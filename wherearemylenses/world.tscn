@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=12 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
-[ext_resource type="Environment" uid="uid://b3b7x8yhw6j5k" path="res://world_environment.tres" id="1_8ff1o"]
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
 
@@ -37,10 +36,9 @@ size = Vector2(800, 800)
 [node name="World" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("1_8ff1o")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.138, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.138, 13.9284, 0)
 motion_mode = 0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -93,6 +91,7 @@ shape = SubResource("BoxShape3D_3wshe")
 
 [node name="BigPipe" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -77.9104, 0)
+use_collision = true
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="BigPipe"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.438, 77.9104, 0)

@@ -1,7 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://67axyi1xr1bu"]
+[gd_scene load_steps=29 format=3 uid="uid://67axyi1xr1bu"]
 
 [ext_resource type="AudioStream" uid="uid://cjfdo2y2uvdnd" path="res://Assets/_SoundFiles/Breathing/Inhale1.wav" id="1_7hkol"]
-[ext_resource type="Shader" path="res://PS1_Shadermaterial.gdshader" id="1_eqtnb"]
 [ext_resource type="AudioStream" uid="uid://ngx0lcy5tkva" path="res://Assets/_SoundFiles/Breathing/Inhale2.wav" id="2_lsj7d"]
 [ext_resource type="AudioStream" uid="uid://p3qg5e0to3sg" path="res://Assets/_SoundFiles/Breathing/Inhale3.wav" id="3_4kw60"]
 [ext_resource type="AudioStream" uid="uid://c0bw0nybpc1vg" path="res://Assets/_SoundFiles/Breathing/Exhale1.wav" id="4_f8x02"]
@@ -244,13 +243,6 @@ func set_needle(p_value: float) -> void:
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h8ys2"]
-shader = ExtResource("1_eqtnb")
-shader_parameter/enabled = true
-shader_parameter/dithering = true
-shader_parameter/colors = 12
-shader_parameter/dither_size = 5
-
 [sub_resource type="GDScript" id="GDScript_rr2cc"]
 script/source = "extends Node3D
 
@@ -384,14 +376,13 @@ position = Vector2(16, -72)
 script = SubResource("GDScript_j4p65")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
-visible = false
 spot_range = 39.832
 spot_angle_attenuation = 1.23114
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
 transform = Transform3D(-0.99973, 0, -0.0232456, 0, 1, 0, 0.0232456, 0, -0.99973, 0, 0, -0.206137)
+visible = false
 mesh = SubResource("QuadMesh_mnx5b")
-surface_material_override/0 = SubResource("ShaderMaterial_h8ys2")
 
 [node name="AwaitGameOverTimer" type="Timer" parent="."]
 wait_time = 5.0
