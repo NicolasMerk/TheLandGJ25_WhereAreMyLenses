@@ -1,6 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
+[ext_resource type="Environment" uid="uid://b3b7x8yhw6j5k" path="res://world_environment.tres" id="1_7bicr"]
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
 
@@ -9,10 +10,6 @@ size = Vector2(1500, 1500)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e1ac4"]
 size = Vector3(1500, 1, 1500)
-
-[sub_resource type="TorusMesh" id="TorusMesh_12656"]
-inner_radius = 7.326
-outer_radius = 11.275
 
 [sub_resource type="SphereMesh" id="SphereMesh_e4a3a"]
 material = ExtResource("1_1erht")
@@ -31,6 +28,7 @@ size = Vector3(10000, 0, 10000)
 [node name="World" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_7bicr")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
 motion_mode = 0
@@ -48,10 +46,6 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_e1ac4")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.18877, -0.982021, 0, 0.982021, 0.18877, 6.34686, 10.5538, -13.0231)
-mesh = SubResource("TorusMesh_12656")
 
 [node name="GlowingMcGuffin" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.712785, 0.586404, -0.384795, -0.343055, -0.18704, -0.920504, -0.61176, 0.788128, 0.0678498, -2450.51, -1257.21, 15.7853)
