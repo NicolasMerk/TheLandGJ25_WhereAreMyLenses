@@ -78,7 +78,7 @@ transform = Transform3D(0.0358016, -0.773441, -0.632857, -0.447772, 0.553724, -0
 shape = SubResource("BoxShape3D_xbyve")
 
 [node name="GlowingMcGuffin" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.935561, 0.0168949, -0.35276, -0.343607, -0.187259, -0.920254, -0.0816053, 0.982165, -0.169387, -378.921, -1257.21, 15.7853)
+transform = Transform3D(0.951286, 0.026058, -0.307205, -0.297312, -0.186205, -0.936447, -0.0816053, 0.982165, -0.169387, -378.921, -1257.21, 15.7853)
 mesh = SubResource("SphereMesh_e4a3a")
 script = ExtResource("3_si08j")
 
