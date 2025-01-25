@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
-[ext_resource type="PackedScene" uid="uid://b4ldqopv3c3it" path="res://player_character.tscn" id="1_35cup"]
+[ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e0a3c"]
@@ -40,6 +40,9 @@ height = 40.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qvvhv")
 
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
+motion_mode = 0
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
@@ -66,6 +69,3 @@ mesh = SubResource("BoxMesh_a2nwf")
 transform = Transform3D(0.935561, 0.0168949, -0.35276, -0.343607, -0.187259, -0.920254, -0.0816053, 0.982165, -0.169387, -182.615, -79.3989, 15.7853)
 mesh = SubResource("SphereMesh_e4a3a")
 script = ExtResource("2_2qduu")
-
-[node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
-motion_mode = 0
