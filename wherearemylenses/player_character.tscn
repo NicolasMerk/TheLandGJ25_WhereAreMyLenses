@@ -57,8 +57,6 @@ func _input(p_event: InputEvent) -> void:
 	if p_event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotation.y -= p_event.relative.x * MOUSE_SENSITIVITY
 		$Camera3D.rotation.x -= p_event.relative.y * MOUSE_SENSITIVITY
-		
-	# TODO: Check for breathing (in/out) and block breathing in once the tank is empty!
 
 	if p_event.is_action_pressed(\"breathe_in\"):
 		if lungs_filled < 1. and $StateManagerNode3D.tank_pressure > 0.:
