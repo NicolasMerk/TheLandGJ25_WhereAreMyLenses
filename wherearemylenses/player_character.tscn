@@ -196,7 +196,7 @@ var tex_barometer_cursed := load(\"res://Assets/Player_Meter/Meter_2_Cursed.png\
 var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle.png\")
 
 @onready var offscreen_position := get_position()
-var onscreen_position = Vector2(120., 475.)
+var onscreen_position = Vector2(48., 180.)
 
 var position_tween : Tween = null
 
@@ -385,13 +385,13 @@ script = SubResource("GDScript_p4012")
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
 
 [node name="ArmRightSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer"]
-position = Vector2(1050, 475)
-scale = Vector2(0.375, 0.375)
+position = Vector2(270, 180)
+scale = Vector2(0.1, 0.1)
 script = SubResource("GDScript_cqw7g")
 
 [node name="ArmLeftSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer"]
-position = Vector2(120, 950)
-scale = Vector2(0.375, 0.375)
+position = Vector2(48, 300)
+scale = Vector2(0.1, 0.1)
 script = SubResource("GDScript_d3jor")
 
 [node name="NeedleSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer/ArmLeftSprite2D"]
