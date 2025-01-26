@@ -1,8 +1,7 @@
-[gd_scene load_steps=42 format=3 uid="uid://67axyi1xr1bu"]
+[gd_scene load_steps=43 format=3 uid="uid://67axyi1xr1bu"]
 
 [ext_resource type="AudioStream" uid="uid://cjfdo2y2uvdnd" path="res://Assets/_SoundFiles/Breathing/Inhale1.wav" id="1_7hkol"]
 [ext_resource type="Shader" path="res://WeirdAssBlurrShader.gdshader" id="1_ckbks"]
-[ext_resource type="PackedScene" uid="uid://ybo42w1y4o5l" path="res://cut_scene.tscn" id="1_tkl3u"]
 [ext_resource type="AudioStream" uid="uid://ngx0lcy5tkva" path="res://Assets/_SoundFiles/Breathing/Inhale2.wav" id="2_lsj7d"]
 [ext_resource type="AudioStream" uid="uid://p3qg5e0to3sg" path="res://Assets/_SoundFiles/Breathing/Inhale3.wav" id="3_4kw60"]
 [ext_resource type="AudioStream" uid="uid://c0bw0nybpc1vg" path="res://Assets/_SoundFiles/Breathing/Exhale1.wav" id="4_f8x02"]
@@ -19,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://duf6iv8fuqljm" path="res://Assets/_SoundFiles/PlayerMonologue/monologue_NeedToPayTheBills.wav" id="16_xcx7a"]
 [ext_resource type="AudioStream" uid="uid://dr8pqnhdheijl" path="res://Assets/_SoundFiles/PlayerMonologue/monologue_YouWillPayMyBill.wav" id="17_loy67"]
 [ext_resource type="AudioStream" uid="uid://de2lgryfhoqy8" path="res://Assets/_SoundFiles/TakingTheLense/TakingTheLense.wav" id="18_2na78"]
+[ext_resource type="AudioStream" uid="uid://fafc22nfbq8o" path="res://Assets/_SoundFiles/Ravel/Cursed_Ravel.wav" id="19_qt5tx"]
 
 [sub_resource type="GDScript" id="GDScript_25k6p"]
 script/source = "extends CharacterBody3D
@@ -39,8 +39,8 @@ const JACKET_LUNGS_WEIGHT := 3.5
 const SWIM_SPEED_BACKWARD := .1
 const WATER_RESISTANCE := 1.18
 
-const TANK_DEPLETION_FACTOR := 8.
-const OXYGEN_RESTORATION_FACTOR := 8.
+const TANK_DEPLETION_FACTOR := 6.
+const OXYGEN_RESTORATION_FACTOR := 16.
 
 @export var MOUSE_SENSITIVITY := 0.005
 @export var MOUSE_ACCELERATION := 50.
@@ -136,6 +136,11 @@ func _physics_process(p_delta: float) -> void:
 # TODO: Make this boi unload world.tscn and open a game over menu!
 func _on_await_game_over_timer_timeout() -> void:
 	queue_free()
+
+
+func _on_transition_1_body_entered(body: Node3D) -> void:
+	if body == self:
+		$AudioStreamPlayersNode/ravel.play()
 "
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xk0f7"]
@@ -287,7 +292,7 @@ const PULSATING_FREQUENCY := 5.
 func _process(p_delta: float) -> void:
 	$\"../Camera3D/CanvasLayer/ArmLeftSprite2D/NeedleSprite2D\".set_needle(tank_pressure / MAX_TANK_PRESSURE)
 
-	nitrogen_saturation = lerp(nitrogen_saturation, global_position.z, p_delta * NITROGEN_SATURATION_RATE)
+	nitrogen_saturation = lerp(nitrogen_saturation, global_position.y, p_delta * NITROGEN_SATURATION_RATE)
 
 	var depth_intoxication := nitrogen_saturation / MAX_NITROGEN_SATURATION
 	if randf() < depth_intoxication:
@@ -412,7 +417,7 @@ script = SubResource("GDScript_25k6p")
 JACKET_FILL_RATE = 20.0
 JACKET_EMPTY_RATE = 100.0
 FALLSPEED = 10.0
-SWIM_SPEED_FORWARD = 3.0
+SWIM_SPEED_FORWARD = 8.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
@@ -436,9 +441,6 @@ script = SubResource("GDScript_d3jor")
 [node name="NeedleSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer/ArmLeftSprite2D"]
 position = Vector2(16, -72)
 script = SubResource("GDScript_j4p65")
-
-[node name="CutScene" parent="Camera3D/CanvasLayer" instance=ExtResource("1_tkl3u")]
-visible = false
 
 [node name="FaintingSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer"]
 position = Vector2(156, 117.5)
@@ -514,6 +516,9 @@ stream = SubResource("AudioStreamRandomizer_bwars")
 wait_time = 6.074
 one_shot = true
 autostart = true
+
+[node name="ravel" type="AudioStreamPlayer" parent="AudioStreamPlayersNode"]
+stream = ExtResource("19_qt5tx")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 amount = 1000
