@@ -1,11 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=24 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
 [ext_resource type="Environment" uid="uid://b3ije4yp4eolq" path="res://world_environment_V2.tres" id="1_feh05"]
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
 [ext_resource type="Shader" path="res://PS1_Shadermaterial.gdshader" id="2_8maa0"]
-[ext_resource type="Texture2D" uid="uid://cniusb5s0rsoc" path="res://Assets/Landlord/Landlord_Clean_1.png" id="5_vchbx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_fk5x3"]
 resource_local_to_scene = true
@@ -131,7 +130,6 @@ script = ExtResource("2_2qduu")
 
 [node name="Buble" type="Sprite3D" parent="MrBuble"]
 transform = Transform3D(-0.996801, 0.0789509, 0.0124114, -0.0751007, -0.978437, 0.192406, 0.0273344, 0.190859, 0.981237, 0, 0, 0)
-texture = ExtResource("5_vchbx")
 
 [node name="LEVEL" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.34202, -0.939693, 0, 0.939693, -0.34202, 0, 0, 0)
