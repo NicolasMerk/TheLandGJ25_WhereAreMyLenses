@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=25 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
@@ -81,7 +81,7 @@ size = Vector3(36.72, 34.36, 1)
 environment = ExtResource("1_feh05")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
-transform = Transform3D(0.454861, 0, -0.890562, 0, 1, 0, 0.890562, 0, 0.454861, 43.2158, 1.19643, 100.239)
+transform = Transform3D(0.976216, 0, -0.216797, 0, 1, 0, 0.216797, 0, 0.976216, 43.2158, 1.19643, 27.8032)
 motion_mode = 0
 JACKET_FILL_RATE = 0.5
 JACKET_EMPTY_RATE = 0.5
