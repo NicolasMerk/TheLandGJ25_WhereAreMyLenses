@@ -1,8 +1,8 @@
 [gd_scene load_steps=24 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
+[ext_resource type="Environment" uid="uid://bwh1o1rx7a2e3" path="res://world_environment_V3_GreenIsh.tres" id="1_8foxp"]
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
-[ext_resource type="Environment" uid="uid://b3ije4yp4eolq" path="res://world_environment_V2.tres" id="1_feh05"]
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
 [ext_resource type="Shader" path="res://PS1_Shadermaterial.gdshader" id="2_8maa0"]
 
@@ -77,10 +77,10 @@ size = Vector3(36.72, 34.36, 1)
 [node name="World" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("1_feh05")
+environment = ExtResource("1_8foxp")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
-transform = Transform3D(0.0420771, 0.498869, -0.865655, 0, 0.866422, 0.499312, 0.999114, -0.0210096, 0.0364566, 45.112, -238.186, -364.953)
+transform = Transform3D(0.997742, 0.00404642, -0.0670349, 0, 0.998183, 0.0602532, 0.0671569, -0.0601172, 0.99593, 33.7217, 11.0637, 58.1711)
 motion_mode = 0
 JACKET_FILL_RATE = 0.5
 JACKET_EMPTY_RATE = 0.5

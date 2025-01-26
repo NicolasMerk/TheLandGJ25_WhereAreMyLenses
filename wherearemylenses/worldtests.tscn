@@ -33,7 +33,7 @@ height = 40.0
 [sub_resource type="PlaneMesh" id="PlaneMesh_p4trg"]
 size = Vector2(800, 800)
 
-[node name="World" type="Node3D"]
+[node name="World2" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_rk64c")
