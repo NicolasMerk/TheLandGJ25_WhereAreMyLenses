@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=22 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
+[ext_resource type="Environment" uid="uid://dk5sn0otuk87q" path="res://world_environment_V4_SlightlyMoreDense.tres" id="1_nvsrs"]
 [ext_resource type="Shader" path="res://PS1_Shadermaterial.gdshader" id="2_8maa0"]
 [ext_resource type="PackedScene" uid="uid://bcvmdo38hflle" path="res://mr_buble.tscn" id="4_deswp"]
 
@@ -70,6 +71,7 @@ size = Vector3(36.72, 34.36, 1)
 [node name="World" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_nvsrs")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
 transform = Transform3D(0.976216, 0, -0.216797, 0, 1, 0, 0.216797, 0, 0.976216, 43.2158, 1.19643, 27.8032)
@@ -122,7 +124,7 @@ height = 12.339
 sides = 64
 
 [node name="MrBuble" parent="." instance=ExtResource("4_deswp")]
-transform = Transform3D(-0.999587, 0.000325085, -0.0287484, 0, 0.999937, 0.0113072, 0.0287502, 0.0113026, -0.999523, 35.0204, -4.68912, -58.7821)
+transform = Transform3D(0.603873, 0.261449, -0.752983, 0, 0.944676, 0.328008, 0.797081, -0.198075, 0.570464, 51.2196, -309.384, -466.349)
 
 [node name="LEVEL" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.34202, -0.939693, 0, 0.939693, -0.34202, 0, 0, 0)
