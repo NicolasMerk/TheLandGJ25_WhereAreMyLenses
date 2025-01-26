@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=18 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
-[ext_resource type="Environment" uid="uid://b3b7x8yhw6j5k" path="res://world_environment.tres" id="1_8ff1o"]
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
 
@@ -57,7 +56,6 @@ size = Vector2(800, 800)
 [node name="World" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("1_8ff1o")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
 transform = Transform3D(0.454861, 0, -0.890562, 0, 1, 0, 0.890562, 0, 0.454861, -14.138, 12.0198, -32.6045)
@@ -102,24 +100,24 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall1"]
 shape = SubResource("BoxShape3D_0txxd")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="Wurst" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0816255, -0.996663, 0, 0.996663, 0.0816255, 0, 0, 0, 1, 45.354, -85.2397, 49.1638)
 mesh = SubResource("CapsuleMesh_j4uip")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Wurst"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wurst/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_fr543")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="BALLs" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.986675, -0.162706, 0, 0.162706, -0.986675, 0, -1.49012e-08, 0, 1, -21.3918, -99.9066, 77.5428)
 mesh = SubResource("SphereMesh_hwjmi")
 skeleton = NodePath("../Wall2/MeshInstance3D")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="BALLs"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BALLs/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_56q4k")
 
 [node name="Wall2" type="StaticBody3D" parent="."]
@@ -180,6 +178,7 @@ rings = 26
 
 [node name="BigPipe2" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.489778, -0.871847, 0, 0.871847, -0.489778, 15.065, -144.965, 45.439)
+use_collision = true
 
 [node name="Pipe" type="CSGCylinder3D" parent="BigPipe2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5496, 37.737, 0)
@@ -196,6 +195,7 @@ sides = 64
 
 [node name="halfpipe" type="CSGCombiner3D" parent="."]
 transform = Transform3D(0.0569019, 0, -0.99838, 0, 1, 0, 0.99838, 0, 0.0569019, 34.8256, -129.349, -38.9283)
+use_collision = true
 
 [node name="PipeWall1" type="CSGBox3D" parent="halfpipe"]
 transform = Transform3D(0.999899, 0, -0.014189, 0, 1, 0, 0.014189, 0, 0.999899, 42.4766, -1.43764, 45.6408)
