@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://67axyi1xr1bu"]
+[gd_scene load_steps=42 format=3 uid="uid://67axyi1xr1bu"]
 
 [ext_resource type="AudioStream" uid="uid://cjfdo2y2uvdnd" path="res://Assets/_SoundFiles/Breathing/Inhale1.wav" id="1_7hkol"]
 [ext_resource type="Shader" path="res://WeirdAssBlurrShader.gdshader" id="1_ckbks"]
@@ -8,9 +8,10 @@
 [ext_resource type="AudioStream" uid="uid://c0bw0nybpc1vg" path="res://Assets/_SoundFiles/Breathing/Exhale1.wav" id="4_f8x02"]
 [ext_resource type="AudioStream" uid="uid://cl068m0bioshk" path="res://Assets/_SoundFiles/Breathing/Exhale2.wav" id="5_rbn80"]
 [ext_resource type="AudioStream" uid="uid://clsl730c22tbq" path="res://Assets/_SoundFiles/Breathing/Exhale3.wav" id="6_1qkdv"]
-[ext_resource type="AudioStream" uid="uid://cygw0d7qxi44k" path="res://Assets/_SoundFiles/Atmo/UnderwaterAtmoV1.wav" id="7_ekkdk"]
 [ext_resource type="AudioStream" uid="uid://dtb28h3gfqio2" path="res://Assets/_SoundFiles/JacketIO/JacketIn.wav" id="8_v6emp"]
+[ext_resource type="AudioStream" uid="uid://c0latdke8822i" path="res://Assets/_SoundFiles/Atmo/UnderwaterAtmoV2.wav" id="9_4cvd0"]
 [ext_resource type="AudioStream" uid="uid://mmkidyqpm1w6" path="res://Assets/_SoundFiles/JacketIO/JacketOut.wav" id="9_mslv8"]
+[ext_resource type="AudioStream" uid="uid://57acuxd3n722" path="res://Assets/_SoundFiles/Atmo/UnderwaterAtmo_Hallucinate_V2.wav" id="10_ih5lt"]
 [ext_resource type="Script" path="res://playler_monologue.gd" id="12_oukvi"]
 [ext_resource type="AudioStream" uid="uid://dveosrwrfyder" path="res://Assets/_SoundFiles/PlayerMonologue/monologue_WhereAreMyLenses.wav" id="13_0etrc"]
 [ext_resource type="AudioStream" uid="uid://cxheoi4x61fkp" path="res://Assets/_SoundFiles/PlayerMonologue/monologue_MyHeadHurts.wav" id="14_b2i7n"]
@@ -303,6 +304,12 @@ func do_something_cursed() -> void:
 	pass
 "
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vad37"]
+playback_mode = 2
+streams_count = 2
+stream_0/stream = ExtResource("9_4cvd0")
+stream_1/stream = ExtResource("10_ih5lt")
+
 [sub_resource type="GDScript" id="GDScript_4vrav"]
 script/source = "extends AudioStreamPlayer
 
@@ -472,7 +479,7 @@ stream = ExtResource("5_rbn80")
 stream = ExtResource("6_1qkdv")
 
 [node name="AtmoPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayersNode"]
-stream = ExtResource("7_ekkdk")
+stream = SubResource("AudioStreamRandomizer_vad37")
 volume_db = -3.0
 autoplay = true
 script = SubResource("GDScript_4vrav")
@@ -492,6 +499,7 @@ script = ExtResource("12_oukvi")
 stream = SubResource("AudioStreamRandomizer_bwars")
 
 [node name="Timer" type="Timer" parent="AudioStreamPlayersNode/PlaylerMonologue"]
+wait_time = 6.074
 one_shot = true
 autostart = true
 
