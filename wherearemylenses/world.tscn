@@ -79,7 +79,7 @@ size = Vector3(36.72, 34.36, 1)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
-transform = Transform3D(0.454861, 0, -0.890562, 0, 1, 0, 0.890562, 0, 0.454861, 43.2158, 1.19643, 100.239)
+transform = Transform3D(0.0420771, 0.498869, -0.865655, 0, 0.866422, 0.499312, 0.999114, -0.0210096, 0.0364566, 45.112, -238.186, -364.953)
 motion_mode = 0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

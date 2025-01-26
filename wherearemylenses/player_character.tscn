@@ -41,7 +41,7 @@ var rotation_target_player : float
 
 func await_game_over() -> void:
 	#block_input = true
-	print(\"irgendwas\")
+	#print(\"irgendwas\")
 	$AwaitGameOverTimer.start()
 
 func _ready():
