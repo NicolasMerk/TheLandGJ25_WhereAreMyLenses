@@ -30,6 +30,7 @@ const SWIM_SPEED_BACKWARD := .1
 const WATER_RESISTANCE := 1.18
 
 const TANK_DEPLETION_FACTOR := 8.
+const OXYGEN_RESTORATION_FACTOR := 8.
 
 @export var MOUSE_SENSITIVITY := 0.005
 @export var MOUSE_ACCELERATION := 50.
@@ -64,7 +65,7 @@ func _input(p_event: InputEvent) -> void:
 			lungs_filled = minf(lungs_filled + BREATHING_SPEED * get_process_delta_time(), 1.)
 
 			$StateManagerNode3D.tank_pressure -= get_process_delta_time() * TANK_DEPLETION_FACTOR
-			$StateManagerNode3D.oxygen_saturation = minf(get_process_delta_time(), $StateManagerNode3D.MAX_OXYGEN_SATURATION)
+			$StateManagerNode3D.oxygen_saturation = minf($StateManagerNode3D.oxygen_saturation + get_process_delta_time() * OXYGEN_RESTORATION_FACTOR, $StateManagerNode3D.MAX_OXYGEN_SATURATION)
 
 			var any_inhale_players_playing := false
 			for inhale_player in $AudioStreamPlayersNode/BreathPlayersNode/InhalePlayersNode.get_children():
