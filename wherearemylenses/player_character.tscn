@@ -254,6 +254,8 @@ func set_needle(p_value: float) -> void:
 	rotation = clampf(p_value, 0., 1.) * PI - PI / 2.
 "
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_i7mgo"]
+
 [sub_resource type="QuadMesh" id="QuadMesh_mnx5b"]
 flip_faces = true
 size = Vector2(2, 2)
@@ -281,6 +283,8 @@ const MAX_NITROGEN_EXCESS := 24. # This valua is used to check for decompression
 const MAX_NITROGEN_SATURATION := 100. # nitrogen_saturation > MAX_NITROGEN_SATURATION leads to max depth_intoxication.
 
 const MAX_OXYGEN_SATURATION := 21.
+const CRITICAL_OXYGEN_SATURATION := 10.
+const PULSATING_FREQUENCY := 5.
 
 func _process(p_delta: float) -> void:
 	$\"../Camera3D/CanvasLayer/ArmLeftSprite2D/NeedleSprite2D\".set_needle(tank_pressure / MAX_TANK_PRESSURE)
@@ -295,6 +299,11 @@ func _process(p_delta: float) -> void:
 	$\"../Camera3D/CanvasLayer/ArmRightSprite2D\".set_bubbles_state(bubbles_state)
 
 	oxygen_saturation -= p_delta * oxygen_consumption_factor
+
+	var faint_alpha := smoothstep(CRITICAL_OXYGEN_SATURATION, 0., oxygen_saturation)
+	var pulse_sinus := sin(float(Time.get_ticks_usec()) * .000001 * PULSATING_FREQUENCY) * .5 + .5
+	var lerped_sinus := pulse_sinus + faint_alpha * 2. - 1.
+	$\"../Camera3D/CanvasLayer/FaintingSprite2D\".self_modulate.a = clampf(lerped_sinus, 0., 1.)
 
 	if bubbles_state >= 3 or oxygen_saturation <= 0.:
 		$\"..\".await_game_over()
@@ -432,6 +441,11 @@ script = SubResource("GDScript_j4p65")
 
 [node name="CutScene" parent="Camera3D/CanvasLayer" instance=ExtResource("1_tkl3u")]
 visible = false
+
+[node name="FaintingSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer"]
+position = Vector2(156, 117.5)
+scale = Vector2(390, 299)
+texture = SubResource("CanvasTexture_i7mgo")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
 light_color = Color(0.865916, 0.868593, 0.782913, 1)
