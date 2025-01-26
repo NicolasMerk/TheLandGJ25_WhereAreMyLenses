@@ -188,6 +188,7 @@ _data = {
 [node name="CutScene" type="Node2D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_08l8s")
 animation_player = NodePath("AnimationPlayer")
+autoplay = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -408,7 +408,6 @@ position = Vector2(16, -72)
 script = SubResource("GDScript_j4p65")
 
 [node name="CutScene" parent="Camera3D/CanvasLayer" instance=ExtResource("1_tkl3u")]
-visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
 light_color = Color(0.865916, 0.868593, 0.782913, 1)
