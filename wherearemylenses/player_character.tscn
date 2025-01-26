@@ -51,8 +51,7 @@ const BREATHING_SPEED := 1.25
 var rotation_target_player : float
 
 func await_game_over() -> void:
-	#block_input = true
-	#print(\"irgendwas\")
+	block_input = true
 	$AwaitGameOverTimer.start()
 
 func _ready():
@@ -166,8 +165,8 @@ script/source = "extends Sprite2D
 
 var tex_bubbles_none = load(\"res://Assets/Player_RightHand/PlayerRightHand_1_Clean_Open.png\")
 var tex_bubbles_few = load(\"res://Assets/Player_RightHand/PlayerRightHand_2_Decomp_Few.png\")
-var tex_bubbles_many = load(\"res://Assets/Player_RightHand/PlayerRightHand_2_Decomp_Few.png\") # placeholder
-var tex_bubbles_all = load(\"res://Assets/Player_RightHand/PlayerRightHand_2_Decomp_Few.png\") # placeholder
+var tex_bubbles_many = load(\"res://Assets/Player_RightHand/PlayerRightHand_3_Decomp_Much.png\")
+var tex_bubbles_all = load(\"res://Assets/Player_RightHand/PlayerRightHand_4_Decomp_ReallyBad.png\")
 
 enum Bubbles
 {
@@ -194,7 +193,6 @@ func set_bubbles_state(p_bubbles: Bubbles) -> void:
 		return
 	if p_bubbles == Bubbles.BUBBLES_ALL and tex_bubbles_all:
 		texture = tex_bubbles_all
-		$\"../../AwaitGameOverTimer\".start
 		return
 	printerr(\"Passed set_bubbles_state an invalid argument or texture is invalid!\")
 "
@@ -295,7 +293,7 @@ func _process(p_delta: float) -> void:
 	if randf() < depth_intoxication:
 		do_something_cursed()
 
-	var bubbles_state := int(minf(global_position.y - nitrogen_saturation, 0.) / MAX_NITROGEN_EXCESS)
+	var bubbles_state := int(maxf(global_position.y - nitrogen_saturation, 0.) / MAX_NITROGEN_EXCESS)
 	$\"../Camera3D/CanvasLayer/ArmRightSprite2D\".set_bubbles_state(bubbles_state)
 
 	oxygen_saturation -= p_delta * oxygen_consumption_factor
