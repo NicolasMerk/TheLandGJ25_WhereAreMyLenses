@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://67axyi1xr1bu"]
+[gd_scene load_steps=32 format=3 uid="uid://67axyi1xr1bu"]
 
 [ext_resource type="AudioStream" uid="uid://cjfdo2y2uvdnd" path="res://Assets/_SoundFiles/Breathing/Inhale1.wav" id="1_7hkol"]
 [ext_resource type="Shader" path="res://WeirdAssBlurrShader.gdshader" id="1_ckbks"]
+[ext_resource type="PackedScene" uid="uid://bk8mv8u86bisa" path="res://cut_scene.tscn" id="1_tkl3u"]
 [ext_resource type="AudioStream" uid="uid://ngx0lcy5tkva" path="res://Assets/_SoundFiles/Breathing/Inhale2.wav" id="2_lsj7d"]
 [ext_resource type="AudioStream" uid="uid://p3qg5e0to3sg" path="res://Assets/_SoundFiles/Breathing/Inhale3.wav" id="3_4kw60"]
 [ext_resource type="AudioStream" uid="uid://c0bw0nybpc1vg" path="res://Assets/_SoundFiles/Breathing/Exhale1.wav" id="4_f8x02"]
@@ -406,6 +407,8 @@ script = SubResource("GDScript_d3jor")
 [node name="NeedleSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer/ArmLeftSprite2D"]
 position = Vector2(16, -72)
 script = SubResource("GDScript_j4p65")
+
+[node name="CutScene" parent="Camera3D/CanvasLayer" instance=ExtResource("1_tkl3u")]
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
 spot_range = 60.75

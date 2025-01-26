@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=22 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
+[ext_resource type="Environment" uid="uid://b3ije4yp4eolq" path="res://world_environment_V2.tres" id="1_feh05"]
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_fk5x3"]
@@ -67,9 +68,10 @@ size = Vector3(36.72, 34.36, 1)
 [node name="World" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_feh05")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
-transform = Transform3D(0.992329, 0, -0.123619, 0, 1, 0, 0.123619, 0, 0.992329, 40.9823, 12.0198, 31.9059)
+transform = Transform3D(0.992329, 0, -0.123619, 0, 1, 0, 0.123619, 0, 0.992329, 40.9823, 12.0198, 7.7322)
 motion_mode = 0
 JACKET_FILL_RATE = 0.5
 JACKET_EMPTY_RATE = 0.5
