@@ -1,14 +1,14 @@
-[gd_scene load_steps=31 format=3 uid="uid://67axyi1xr1bu"]
+[gd_scene load_steps=32 format=3 uid="uid://67axyi1xr1bu"]
 
 [ext_resource type="AudioStream" uid="uid://cjfdo2y2uvdnd" path="res://Assets/_SoundFiles/Breathing/Inhale1.wav" id="1_7hkol"]
 [ext_resource type="Shader" path="res://WeirdAssBlurrShader.gdshader" id="1_ckbks"]
+[ext_resource type="PackedScene" uid="uid://bk8mv8u86bisa" path="res://cut_scene.tscn" id="1_tkl3u"]
 [ext_resource type="AudioStream" uid="uid://ngx0lcy5tkva" path="res://Assets/_SoundFiles/Breathing/Inhale2.wav" id="2_lsj7d"]
 [ext_resource type="AudioStream" uid="uid://p3qg5e0to3sg" path="res://Assets/_SoundFiles/Breathing/Inhale3.wav" id="3_4kw60"]
 [ext_resource type="AudioStream" uid="uid://c0bw0nybpc1vg" path="res://Assets/_SoundFiles/Breathing/Exhale1.wav" id="4_f8x02"]
 [ext_resource type="AudioStream" uid="uid://cl068m0bioshk" path="res://Assets/_SoundFiles/Breathing/Exhale2.wav" id="5_rbn80"]
 [ext_resource type="AudioStream" uid="uid://clsl730c22tbq" path="res://Assets/_SoundFiles/Breathing/Exhale3.wav" id="6_1qkdv"]
 [ext_resource type="AudioStream" uid="uid://cygw0d7qxi44k" path="res://Assets/_SoundFiles/Atmo/UnderwaterAtmoV1.wav" id="7_ekkdk"]
-[ext_resource type="Texture2D" uid="uid://0drmvr2kc0m" path="res://Assets/ParticleAssets/BubbleParticle.png" id="7_ryqxq"]
 [ext_resource type="AudioStream" uid="uid://dtb28h3gfqio2" path="res://Assets/_SoundFiles/JacketIO/JacketIn.wav" id="8_v6emp"]
 [ext_resource type="AudioStream" uid="uid://mmkidyqpm1w6" path="res://Assets/_SoundFiles/JacketIO/JacketOut.wav" id="9_mslv8"]
 
@@ -30,6 +30,8 @@ const JACKET_LUNGS_WEIGHT := 3.5
 @export var SWIM_SPEED_FORWARD := 0.5
 const SWIM_SPEED_BACKWARD := .1
 const WATER_RESISTANCE := 1.18
+
+const TANK_DEPLETION_FACTOR := 8.
 
 @export var MOUSE_SENSITIVITY := 0.005
 @export var MOUSE_ACCELERATION := 50.
@@ -63,7 +65,7 @@ func _input(p_event: InputEvent) -> void:
 		if lungs_filled < 1. and $StateManagerNode3D.tank_pressure > 0.:
 			lungs_filled = minf(lungs_filled + BREATHING_SPEED * get_process_delta_time(), 1.)
 
-			$StateManagerNode3D.tank_pressure -= get_process_delta_time()
+			$StateManagerNode3D.tank_pressure -= get_process_delta_time() * TANK_DEPLETION_FACTOR
 			$StateManagerNode3D.oxygen_saturation = minf(get_process_delta_time(), $StateManagerNode3D.MAX_OXYGEN_SATURATION)
 
 			var any_inhale_players_playing := false
@@ -199,7 +201,7 @@ var tex_barometer_cursed := load(\"res://Assets/Player_Meter/Meter_2_Cursed.png\
 var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle.png\")
 
 @onready var offscreen_position := get_position()
-var onscreen_position = Vector2(120., 475.)
+var onscreen_position = Vector2(48., 180.)
 
 var position_tween : Tween = null
 
@@ -357,7 +359,6 @@ collision_bounce = 0.07
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdx0s"]
 transparency = 1
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("7_ryqxq")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -366,6 +367,15 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_rp6hd"]
 material = SubResource("StandardMaterial3D_vdx0s")
+
+[sub_resource type="GDScript" id="GDScript_gccqr"]
+script/source = "extends GPUParticles3D
+
+var tex_bubble_particles = load(\"res://Assets/ParticleAssets/BubbleParticle.png\")
+
+func _ready() -> void:
+	draw_pass_1.material.albedo_texture = tex_bubble_particles
+"
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 motion_mode = 1
@@ -385,20 +395,24 @@ script = SubResource("GDScript_p4012")
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
 
 [node name="ArmRightSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer"]
-position = Vector2(1050, 475)
-scale = Vector2(0.375, 0.375)
+position = Vector2(270, 180)
+scale = Vector2(0.1, 0.1)
 script = SubResource("GDScript_cqw7g")
 
 [node name="ArmLeftSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer"]
-position = Vector2(120, 950)
-scale = Vector2(0.375, 0.375)
+position = Vector2(48, 300)
+scale = Vector2(0.1, 0.1)
 script = SubResource("GDScript_d3jor")
 
 [node name="NeedleSprite2D" type="Sprite2D" parent="Camera3D/CanvasLayer/ArmLeftSprite2D"]
 position = Vector2(16, -72)
 script = SubResource("GDScript_j4p65")
 
+[node name="CutScene" parent="Camera3D/CanvasLayer" instance=ExtResource("1_tkl3u")]
+visible = false
+
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+light_color = Color(0.865916, 0.868593, 0.782913, 1)
 spot_range = 60.75
 spot_attenuation = 0.0
 spot_angle_attenuation = 1.23114
@@ -462,6 +476,7 @@ lifetime = 10.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_xxm07")
 draw_pass_1 = SubResource("QuadMesh_rp6hd")
+script = SubResource("GDScript_gccqr")
 
 [connection signal="timeout" from="AwaitGameOverTimer" to="." method="_on_await_game_over_timer_timeout"]
 [connection signal="finished" from="AudioStreamPlayersNode/AtmoPlayer" to="AudioStreamPlayersNode/AtmoPlayer" method="_on_finished"]

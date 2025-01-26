@@ -3,15 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://ba6b8y6ljvugf" path="res://Assets/WinSequence/Frame_6.png" id="1_7k5lx"]
 [ext_resource type="Script" path="res://cut_scene.gd" id="1_08l8s"]
 [ext_resource type="Texture2D" uid="uid://dtb2edrsricn" path="res://Assets/WinSequence/Frame_1.png" id="1_8rmhr"]
+[ext_resource type="AudioStream" uid="uid://de2lgryfhoqy8" path="res://Assets/_SoundFiles/TakingTheLense/TakingTheLense.wav" id="2_tmtjo"]
 [ext_resource type="Texture2D" uid="uid://dpxk3nx0d3s5w" path="res://Assets/WinSequence/Frame_5.png" id="2_wgp1f"]
 [ext_resource type="Texture2D" uid="uid://i03hgadky3om" path="res://Assets/WinSequence/Frame_4_blackscreen.png" id="3_yyekj"]
 [ext_resource type="Texture2D" uid="uid://c1qohqo1o01i3" path="res://Assets/WinSequence/Frame_3.png" id="4_3rn5a"]
 [ext_resource type="Texture2D" uid="uid://q2o84wqynuu0" path="res://Assets/WinSequence/Frame_2.png" id="5_j2pg0"]
-[ext_resource type="AudioStream" uid="uid://cygw0d7qxi44k" path="res://Assets/_SoundFiles/Atmo/UnderwaterAtmoV1.wav" id="7_vt4sl"]
 
 [sub_resource type="Animation" id="Animation_cqkb3"]
 resource_name = "End_Cutscene"
-length = 25.0
+length = 19.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -79,11 +79,30 @@ tracks/5/path = NodePath("Frame6:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(16.1, 35.0333),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(16.1, 17.4667, 35.0333),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false]
+"values": [true, false, false]
 }
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Taking The lense")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_tmtjo")
+}, {
+"end_offset": 0.0,
+"start_offset": 2.02,
+"stream": ExtResource("2_tmtjo")
+}],
+"times": PackedFloat32Array(10.8667, 15.5)
+}
+tracks/6/use_blend = true
 
 [sub_resource type="Animation" id="Animation_h7oua"]
 length = 0.001
@@ -174,6 +193,7 @@ animation_player = NodePath("AnimationPlayer")
 libraries = {
 "": SubResource("AnimationLibrary_2hmw5")
 }
+movie_quit_on_finish = true
 
 [node name="Frame6" type="Sprite2D" parent="."]
 position = Vector2(160, 120)
@@ -205,6 +225,5 @@ position = Vector2(162, 121)
 scale = Vector2(0.161133, 0.16276)
 texture = ExtResource("1_8rmhr")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_vt4sl")
+[node name="Taking The lense" type="AudioStreamPlayer" parent="."]
 volume_db = -6.0

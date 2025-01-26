@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=25 format=3 uid="uid://cuowist1iksg3"]
 
 [ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
+[ext_resource type="Environment" uid="uid://b3ije4yp4eolq" path="res://world_environment_V2.tres" id="1_feh05"]
 [ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
 [ext_resource type="Shader" path="res://PS1_Shadermaterial.gdshader" id="2_8maa0"]
 [ext_resource type="Texture2D" uid="uid://cniusb5s0rsoc" path="res://Assets/Landlord/Landlord_Clean_1.png" id="5_vchbx"]
@@ -77,10 +78,15 @@ size = Vector3(36.72, 34.36, 1)
 [node name="World" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_feh05")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
-transform = Transform3D(0.0420771, 0.498869, -0.865655, 0, 0.866422, 0.499312, 0.999114, -0.0210096, 0.0364566, 45.112, -238.186, -364.953)
+transform = Transform3D(0.976216, 0, -0.216797, 0, 1, 0, 0.216797, 0, 0.976216, 43.2158, 1.19643, 27.8032)
 motion_mode = 0
+JACKET_FILL_RATE = 0.5
+JACKET_EMPTY_RATE = 0.5
+FALLSPEED = 1.0
+SWIM_SPEED_FORWARD = 0.5
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
@@ -293,18 +299,12 @@ operation = 2
 radius = 50.0
 rings = 12
 
-[node name="CSGSphere3D2" type="CSGSphere3D" parent="LEVEL/halfpipe/CSGSphere3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.3576, 24.8368, 0)
-operation = 2
-radius = 50.0
-rings = 12
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LEVEL"]
-transform = Transform3D(1, 0, 0, 0, -0.464131, 0.885767, 0, -0.885767, -0.464131, 20.2571, -147.632, 8.04431)
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="LEVEL"]
+transform = Transform3D(1, 0, 0, 0, -0.464131, 0.885767, 0, -0.885767, -0.464131, 81.6309, -147.632, 97.0673)
 mesh = SubResource("BoxMesh_slh8h")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="LEVEL"]
-transform = Transform3D(1, 0, 0, 0, -0.464131, 0.885767, 0, -0.885767, -0.464131, 81.6309, -147.632, 97.0673)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.464131, 0.885767, 0, -0.885767, -0.464131, 20.2571, -147.632, 8.04431)
 mesh = SubResource("BoxMesh_slh8h")
 skeleton = NodePath("../..")
