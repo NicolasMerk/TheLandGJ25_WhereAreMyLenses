@@ -8,7 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://cl068m0bioshk" path="res://Assets/_SoundFiles/Breathing/Exhale2.wav" id="5_rbn80"]
 [ext_resource type="AudioStream" uid="uid://clsl730c22tbq" path="res://Assets/_SoundFiles/Breathing/Exhale3.wav" id="6_1qkdv"]
 [ext_resource type="AudioStream" uid="uid://cygw0d7qxi44k" path="res://Assets/_SoundFiles/Atmo/UnderwaterAtmoV1.wav" id="7_ekkdk"]
-[ext_resource type="Texture2D" uid="uid://0drmvr2kc0m" path="res://Assets/ParticleAssets/BubbleParticle.png" id="7_ryqxq"]
 [ext_resource type="AudioStream" uid="uid://dtb28h3gfqio2" path="res://Assets/_SoundFiles/JacketIO/JacketIn.wav" id="8_v6emp"]
 [ext_resource type="AudioStream" uid="uid://mmkidyqpm1w6" path="res://Assets/_SoundFiles/JacketIO/JacketOut.wav" id="9_mslv8"]
 
@@ -354,7 +353,6 @@ collision_bounce = 0.07
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdx0s"]
 transparency = 1
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("7_ryqxq")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -363,6 +361,15 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_rp6hd"]
 material = SubResource("StandardMaterial3D_vdx0s")
+
+[sub_resource type="GDScript" id="GDScript_gccqr"]
+script/source = "extends GPUParticles3D
+
+var tex_bubble_particles = load(\"res://Assets/ParticleAssets/BubbleParticle.png\")
+
+func _ready() -> void:
+	draw_pass_1.material.albedo_texture = tex_bubble_particles
+"
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 motion_mode = 1
@@ -454,6 +461,7 @@ lifetime = 10.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_xxm07")
 draw_pass_1 = SubResource("QuadMesh_rp6hd")
+script = SubResource("GDScript_gccqr")
 
 [connection signal="timeout" from="AwaitGameOverTimer" to="." method="_on_await_game_over_timer_timeout"]
 [connection signal="finished" from="AudioStreamPlayersNode/AtmoPlayer" to="AudioStreamPlayersNode/AtmoPlayer" method="_on_finished"]
