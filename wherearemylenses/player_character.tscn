@@ -281,7 +281,7 @@ func _process(p_delta: float) -> void:
 	if randf() < depth_intoxication:
 		do_something_cursed()
 
-	var bubbles_state := int(minf(global_position.z - nitrogen_saturation, 0.) / MAX_NITROGEN_EXCESS)
+	var bubbles_state := int(minf(global_position.y - nitrogen_saturation, 0.) / MAX_NITROGEN_EXCESS)
 	$\"../Camera3D/CanvasLayer/ArmRightSprite2D\".set_bubbles_state(bubbles_state)
 
 	oxygen_saturation -= p_delta * oxygen_consumption_factor
