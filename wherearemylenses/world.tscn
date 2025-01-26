@@ -74,7 +74,7 @@ size = Vector3(36.72, 34.36, 1)
 environment = ExtResource("1_8foxp")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
-transform = Transform3D(0.997742, 0.00404642, -0.0670349, 0, 0.998183, 0.0602532, 0.0671569, -0.0601172, 0.99593, 33.7217, 11.0637, 58.1711)
+transform = Transform3D(0.976216, 0, -0.216797, 0, 1, 0, 0.216797, 0, 0.976216, 43.2158, 1.19643, 27.8032)
 motion_mode = 0
 JACKET_FILL_RATE = 0.5
 JACKET_EMPTY_RATE = 0.5
