@@ -1,10 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=22 format=3 uid="uid://cuowist1iksg3"]
 
-[ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_1erht"]
 [ext_resource type="Environment" uid="uid://bwh1o1rx7a2e3" path="res://world_environment_V3_GreenIsh.tres" id="1_8foxp"]
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
-[ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_2qduu"]
 [ext_resource type="Shader" path="res://PS1_Shadermaterial.gdshader" id="2_8maa0"]
+[ext_resource type="PackedScene" uid="uid://bcvmdo38hflle" path="res://mr_buble.tscn" id="4_deswp"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_fk5x3"]
 resource_local_to_scene = true
@@ -30,11 +29,6 @@ shader_parameter/dither_size = 1
 [sub_resource type="PlaneMesh" id="PlaneMesh_m8c20"]
 material = SubResource("ShaderMaterial_etpns")
 size = Vector2(1600, 1600)
-
-[sub_resource type="SphereMesh" id="SphereMesh_e4a3a"]
-material = ExtResource("1_1erht")
-radius = 7.0
-height = 14.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_12656"]
 inner_radius = 13.417
@@ -119,17 +113,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -310.655, -94.291)
 use_collision = true
 mesh = SubResource("PlaneMesh_m8c20")
 
-[node name="MrBuble" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.34202, -0.939693, 0, 0.939693, -0.34202, 197.85, -309.4, -347.318)
-
-[node name="GlowingMcGuffin" type="MeshInstance3D" parent="MrBuble"]
-transform = Transform3D(0.712785, 0.586404, -0.384795, -0.343055, -0.18704, -0.920504, -0.61176, 0.788128, 0.0678498, 0, 0, 0)
-mesh = SubResource("SphereMesh_e4a3a")
-skeleton = NodePath("../..")
-script = ExtResource("2_2qduu")
-
-[node name="Buble" type="Sprite3D" parent="MrBuble"]
-transform = Transform3D(-0.996801, 0.0789509, 0.0124114, -0.0751007, -0.978437, 0.192406, 0.0273344, 0.190859, 0.981237, 0, 0, 0)
+[node name="MrBuble" parent="." instance=ExtResource("4_deswp")]
 
 [node name="LEVEL" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.34202, -0.939693, 0, 0.939693, -0.34202, 0, 0, 0)
