@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://0drmvr2kc0m"
 path.s3tc="res://.godot/imported/BubbleParticle.png-39b1d6eaf8c08e9c6149057f2d471c62.s3tc.ctex"
+path.etc2="res://.godot/imported/BubbleParticle.png-39b1d6eaf8c08e9c6149057f2d471c62.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/ParticleAssets/BubbleParticle.png"
-dest_files=["res://.godot/imported/BubbleParticle.png-39b1d6eaf8c08e9c6149057f2d471c62.s3tc.ctex"]
+dest_files=["res://.godot/imported/BubbleParticle.png-39b1d6eaf8c08e9c6149057f2d471c62.s3tc.ctex", "res://.godot/imported/BubbleParticle.png-39b1d6eaf8c08e9c6149057f2d471c62.etc2.ctex"]
 
 [params]
 
