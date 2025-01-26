@@ -336,6 +336,7 @@ curve = SubResource("Curve_fa2ft")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xxm07"]
 emission_shape = 3
 emission_box_extents = Vector3(50, 50, 50)
+spread = 14.168
 initial_velocity_min = 1.0
 initial_velocity_max = 2.0
 angular_velocity_min = 30.0
