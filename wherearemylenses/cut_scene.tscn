@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bk8mv8u86bisa"]
+[gd_scene load_steps=12 format=3 uid="uid://ybo42w1y4o5l"]
 
 [ext_resource type="Texture2D" uid="uid://ba6b8y6ljvugf" path="res://Assets/WinSequence/Frame_6.png" id="1_7k5lx"]
 [ext_resource type="Script" path="res://cut_scene.gd" id="1_08l8s"]
