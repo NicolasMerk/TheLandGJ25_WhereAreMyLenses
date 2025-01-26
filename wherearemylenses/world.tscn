@@ -3,7 +3,7 @@
 [ext_resource type="Environment" uid="uid://clt8efmcnxwv1" path="res://world_environment_V3_GreenIsh.tres" id="1_8foxp"]
 [ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
 [ext_resource type="Shader" path="res://PS1_Shadermaterial.gdshader" id="2_8maa0"]
-[ext_resource type="PackedScene" uid="uid://bikyts2vpt1un" path="res://mr_buble.tscn" id="4_deswp"]
+[ext_resource type="PackedScene" uid="uid://bcvmdo38hflle" path="res://mr_buble.tscn" id="4_deswp"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_fk5x3"]
 resource_local_to_scene = true
