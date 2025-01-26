@@ -32,6 +32,7 @@ const SWIM_SPEED_BACKWARD := .1
 const WATER_RESISTANCE := 1.18
 
 const TANK_DEPLETION_FACTOR := 8.
+const OXYGEN_RESTORATION_FACTOR := 8.
 
 @export var MOUSE_SENSITIVITY := 0.005
 @export var MOUSE_ACCELERATION := 50.
@@ -58,15 +59,13 @@ func _input(p_event: InputEvent) -> void:
 	if p_event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotation.y -= p_event.relative.x * MOUSE_SENSITIVITY
 		$Camera3D.rotation.x -= p_event.relative.y * MOUSE_SENSITIVITY
-		
-	# TODO: Check for breathing (in/out) and block breathing in once the tank is empty!
 
 	if p_event.is_action_pressed(\"breathe_in\"):
 		if lungs_filled < 1. and $StateManagerNode3D.tank_pressure > 0.:
 			lungs_filled = minf(lungs_filled + BREATHING_SPEED * get_process_delta_time(), 1.)
 
 			$StateManagerNode3D.tank_pressure -= get_process_delta_time() * TANK_DEPLETION_FACTOR
-			$StateManagerNode3D.oxygen_saturation = minf(get_process_delta_time(), $StateManagerNode3D.MAX_OXYGEN_SATURATION)
+			$StateManagerNode3D.oxygen_saturation = minf($StateManagerNode3D.oxygen_saturation + get_process_delta_time() * OXYGEN_RESTORATION_FACTOR, $StateManagerNode3D.MAX_OXYGEN_SATURATION)
 
 			var any_inhale_players_playing := false
 			for inhale_player in $AudioStreamPlayersNode/BreathPlayersNode/InhalePlayersNode.get_children():
@@ -284,7 +283,7 @@ func _process(p_delta: float) -> void:
 	if randf() < depth_intoxication:
 		do_something_cursed()
 
-	var bubbles_state := int(minf(global_position.z - nitrogen_saturation, 0.) / MAX_NITROGEN_EXCESS)
+	var bubbles_state := int(minf(global_position.y - nitrogen_saturation, 0.) / MAX_NITROGEN_EXCESS)
 	$\"../Camera3D/CanvasLayer/ArmRightSprite2D\".set_bubbles_state(bubbles_state)
 
 	oxygen_saturation -= p_delta * oxygen_consumption_factor
