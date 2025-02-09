@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://cuowist1iksg3"]
 
-[ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
+[ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://Assets/PlayerCharacter/player_character.tscn" id="1_35cup"]
 [ext_resource type="Environment" uid="uid://dk5sn0otuk87q" path="res://world_environment_V4_SlightlyMoreDense.tres" id="1_nvsrs"]
 [ext_resource type="Shader" path="res://PS1_Shadermaterial.gdshader" id="2_8maa0"]
 [ext_resource type="PackedScene" uid="uid://bcvmdo38hflle" path="res://mr_buble.tscn" id="4_deswp"]
