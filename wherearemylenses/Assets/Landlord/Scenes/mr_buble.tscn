@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bcvmdo38hflle"]
 
-[ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://glowing_mcguffin.tres" id="1_ucf2n"]
-[ext_resource type="Script" path="res://glowing_mc_guffin.gd" id="2_fcm26"]
+[ext_resource type="Material" uid="uid://xm5q02elj4er" path="res://Assets/WorldObjects/McGuffin/glowing_mcguffin.tres" id="1_ucf2n"]
+[ext_resource type="Script" path="res://Assets/WorldObjects/McGuffin/glowing_mc_guffin.gd" id="2_fcm26"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_e4a3a"]
 material = ExtResource("1_ucf2n")

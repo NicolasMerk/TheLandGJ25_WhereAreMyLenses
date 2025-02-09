@@ -1,9 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://cuowist1iksg3"]
+[gd_scene load_steps=21 format=3 uid="uid://cuowist1iksg3"]
 
-[ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://player_character.tscn" id="1_35cup"]
-[ext_resource type="Environment" uid="uid://dk5sn0otuk87q" path="res://world_environment_V4_SlightlyMoreDense.tres" id="1_nvsrs"]
-[ext_resource type="Shader" path="res://PS1_Shadermaterial.gdshader" id="2_8maa0"]
-[ext_resource type="PackedScene" uid="uid://bcvmdo38hflle" path="res://mr_buble.tscn" id="4_deswp"]
+[ext_resource type="Environment" uid="uid://dk5sn0otuk87q" path="res://Assets/World/world_environment_V4_SlightlyMoreDense.tres" id="1_m2a42"]
+[ext_resource type="PackedScene" uid="uid://67axyi1xr1bu" path="res://Assets/PlayerCharacter/Scenes/player_character.tscn" id="2_0n5r1"]
+[ext_resource type="PackedScene" uid="uid://bcvmdo38hflle" path="res://Assets/Landlord/Scenes/mr_buble.tscn" id="3_7ufun"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_fk5x3"]
 resource_local_to_scene = true
@@ -20,11 +19,6 @@ size = Vector3(200.29, 1, 250)
 size = Vector3(200, 1, 250)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_etpns"]
-shader = ExtResource("2_8maa0")
-shader_parameter/enabled = true
-shader_parameter/dithering = true
-shader_parameter/colors = 12
-shader_parameter/dither_size = 1
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_m8c20"]
 material = SubResource("ShaderMaterial_etpns")
@@ -71,9 +65,9 @@ size = Vector3(36.72, 34.36, 1)
 [node name="World" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("1_nvsrs")
+environment = ExtResource("1_m2a42")
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("1_35cup")]
+[node name="PlayerCharacter" parent="." instance=ExtResource("2_0n5r1")]
 transform = Transform3D(0.976216, 0, -0.216797, 0, 1, 0, 0.216797, 0, 0.976216, 43.2158, 1.19643, 27.8032)
 motion_mode = 0
 JACKET_FILL_RATE = 0.5
@@ -123,7 +117,7 @@ radius = 260.647
 height = 12.339
 sides = 64
 
-[node name="MrBuble" parent="." instance=ExtResource("4_deswp")]
+[node name="MrBuble" parent="." instance=ExtResource("3_7ufun")]
 transform = Transform3D(0.603873, 0.261449, -0.752983, 0, 0.944676, 0.328008, 0.797081, -0.198075, 0.570464, 51.2196, -309.384, -466.349)
 
 [node name="LEVEL" type="Node3D" parent="."]
