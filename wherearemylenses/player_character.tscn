@@ -18,7 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://ob4yk0qy2b8s" path="res://Assets/_SoundFiles/PlayerMonologue/monologue_need_to_pay_the_bills.wav" id="16_xcx7a"]
 [ext_resource type="AudioStream" uid="uid://bjqai07l2uno5" path="res://Assets/_SoundFiles/PlayerMonologue/monologue_you_will_pay_my_bill.wav" id="17_loy67"]
 [ext_resource type="AudioStream" uid="uid://oh72bxla2sd2" path="res://Assets/_SoundFiles/TakingTheLense/taking_the_lense.wav" id="18_2na78"]
-[ext_resource type="AudioStream" uid="uid://dp3w1dn81n8xe" path="res://Assets/_SoundFiles/Ravel/Cursed_Ravel.wav" id="19_qt5tx"]
+[ext_resource type="AudioStream" uid="uid://bbrm0v17tcam" path="res://Assets/_SoundFiles/Ravel/cursed_ravel.wav" id="19_qt5tx"]
 
 [sub_resource type="GDScript" id="GDScript_25k6p"]
 script/source = "extends CharacterBody3D
