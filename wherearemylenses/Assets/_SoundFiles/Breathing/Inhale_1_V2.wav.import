@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cq0uj175hwboy"
-path="res://.godot/imported/Inhale_1_V2.wav-01203678350bd8365f37aaeb6c3e8f95.sample"
+path="res://.godot/imported/inhale_1_v2.wav-cc5d3b7c3676e9e3ff77d07259bbb46e.sample"
 
 [deps]
 
-source_file="res://Assets/_SoundFiles/Breathing/Inhale_1_V2.wav"
-dest_files=["res://.godot/imported/Inhale_1_V2.wav-01203678350bd8365f37aaeb6c3e8f95.sample"]
+source_file="res://Assets/_SoundFiles/Breathing/inhale_1_v2.wav"
+dest_files=["res://.godot/imported/inhale_1_v2.wav-cc5d3b7c3676e9e3ff77d07259bbb46e.sample"]
 
 [params]
 

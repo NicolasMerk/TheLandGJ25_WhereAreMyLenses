@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://sekscdj272t6"
-path="res://.godot/imported/Landlord_Cursed_1.png-3d24502a2be8c3215039181c6f06b4d6.ctex"
+path="res://.godot/imported/landlord_cursed_1.png-35138e24fdd9390de79ac00fc99b8274.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Landlord/Landlord_Cursed_1.png"
-dest_files=["res://.godot/imported/Landlord_Cursed_1.png-3d24502a2be8c3215039181c6f06b4d6.ctex"]
+source_file="res://Assets/Landlord/landlord_cursed_1.png"
+dest_files=["res://.godot/imported/landlord_cursed_1.png-35138e24fdd9390de79ac00fc99b8274.ctex"]
 
 [params]
 

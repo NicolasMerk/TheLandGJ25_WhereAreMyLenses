@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://i03hgadky3om"
-path="res://.godot/imported/Frame_4_blackscreen.png-c2db48ee1e90c5c8fe3a4dbaa6590ddc.ctex"
+path="res://.godot/imported/frame_4_blackscreen.png-7d23e8712f48d159ec32c41561a6a155.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/WinSequence/Frame_4_blackscreen.png"
-dest_files=["res://.godot/imported/Frame_4_blackscreen.png-c2db48ee1e90c5c8fe3a4dbaa6590ddc.ctex"]
+source_file="res://Assets/WinSequence/frame_4_blackscreen.png"
+dest_files=["res://.godot/imported/frame_4_blackscreen.png-7d23e8712f48d159ec32c41561a6a155.ctex"]
 
 [params]
 
