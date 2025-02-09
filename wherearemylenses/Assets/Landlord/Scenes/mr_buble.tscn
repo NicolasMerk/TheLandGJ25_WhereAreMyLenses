@@ -20,7 +20,7 @@ func _ready() -> void:
 [sub_resource type="GDScript" id="GDScript_j6h4s"]
 script/source = "extends Area3D
 
-const CUTSCENE := preload(\"res://cut_scene.tscn\")
+const CUTSCENE := preload(\"res://Assets/CutScenes/Scenes/cut_scene.tscn\")
 @onready var CHARACTER : CharacterBody3D = get_tree().get_first_node_in_group(\"character\")
 
 
