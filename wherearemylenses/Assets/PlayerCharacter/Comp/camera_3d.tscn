@@ -1,0 +1,163 @@
+[gd_scene load_steps=9 format=3 uid="uid://brir8kp0x6dgb"]
+
+[ext_resource type="Shader" path="res://WeirdAssBlurrShader.gdshader" id="1_64h4q"]
+
+[sub_resource type="GDScript" id="GDScript_p4012"]
+script/source = "extends Camera3D
+
+
+var rotation_amplitude := 0.
+var time_passed := 0.
+
+const ROTATION_SPEED := 1.
+
+
+#func _process(p_delta: float) -> void:
+	#time_passed += p_delta
+#
+	#rotation_amplitude = $\"..\".velocity.length() / 10.
+	#rotation_amplitude = clampf(rotation_amplitude, 0., 1.)
+#
+	#rotation.z = sin(time_passed * ROTATION_SPEED) * rotation_amplitude
+"
+
+[sub_resource type="GDScript" id="GDScript_cqw7g"]
+script/source = "extends Sprite2D
+
+
+var tex_bubbles_none = load(\"res://Assets/Player_RightHand/PlayerRightHand_1_Clean_Open.png\")
+var tex_bubbles_few = load(\"res://Assets/Player_RightHand/PlayerRightHand_2_Decomp_Few.png\")
+var tex_bubbles_many = load(\"res://Assets/Player_RightHand/PlayerRightHand_3_Decomp_Much.png\")
+var tex_bubbles_all = load(\"res://Assets/Player_RightHand/PlayerRightHand_4_Decomp_ReallyBad.png\")
+
+enum Bubbles
+{
+	BUBBLES_NONE = 0,
+	BUBBLES_FEW = 1,
+	BUBBLES_MANY = 2,
+	BUBBLES_ALL = 3,
+}
+
+
+func _ready() -> void:
+	texture = tex_bubbles_none
+
+
+func set_bubbles_state(p_bubbles: Bubbles) -> void:
+	if p_bubbles == Bubbles.BUBBLES_NONE and tex_bubbles_none:
+		texture = tex_bubbles_none
+		return
+	if p_bubbles == Bubbles.BUBBLES_FEW and tex_bubbles_few:
+		texture = tex_bubbles_few
+		return
+	if p_bubbles == Bubbles.BUBBLES_MANY and tex_bubbles_many:
+		texture = tex_bubbles_many
+		return
+	if p_bubbles == Bubbles.BUBBLES_ALL and tex_bubbles_all:
+		texture = tex_bubbles_all
+		return
+	printerr(\"Passed set_bubbles_state an invalid argument or texture is invalid!\")
+"
+
+[sub_resource type="GDScript" id="GDScript_d3jor"]
+script/source = "extends Sprite2D
+
+var tex_barometer_clean := load(\"res://Assets/Player_LeftHand/Player_LeftHand_1_Clean.png\")
+var tex_barometer_cursed := load(\"res://Assets/Player_Meter/Meter_2_Cursed.png\")
+
+var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle.png\")
+
+@onready var offscreen_position := get_position()
+var onscreen_position = Vector2(48., 180.)
+
+var position_tween : Tween = null
+
+
+const FADEIN_DURATION := .5
+const FADEOUT_DURATION := .5
+
+
+func _ready() -> void:
+	texture = tex_barometer_clean
+
+func _process(p_delta: float) -> void:
+	pass
+
+func _input(p_event: InputEvent) -> void:
+	if p_event.is_action_pressed(\"finimeter_visibility\"):
+		if position_tween:
+			position_tween.kill()
+			position_tween = null
+		position_tween = create_tween()
+		position_tween.tween_property(self, \"position\", onscreen_position, FADEIN_DURATION)
+		return
+	if p_event.is_action_released(\"finimeter_visibility\"):
+		if position_tween:
+			position_tween.kill()
+			position_tween = null
+		position_tween = create_tween()
+		position_tween.tween_property(self, \"position\", offscreen_position, FADEOUT_DURATION)
+		return
+"
+
+[sub_resource type="GDScript" id="GDScript_j4p65"]
+script/source = "extends Sprite2D
+
+
+var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle_V2.png\")
+
+
+func _ready() -> void:
+	texture = tex_needle
+
+func set_needle(p_value: float) -> void:
+	rotation = clampf(p_value, 0., 1.) * PI - PI / 2.
+"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_i7mgo"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_mnx5b"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oovjs"]
+shader = ExtResource("1_64h4q")
+shader_parameter/seed = 95.06
+shader_parameter/power = 0.05
+shader_parameter/speed = 0.16
+
+[node name="Camera3D" type="Camera3D"]
+script = SubResource("GDScript_p4012")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ArmRightSprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(270, 180)
+scale = Vector2(0.1, 0.1)
+script = SubResource("GDScript_cqw7g")
+
+[node name="ArmLeftSprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(48, 300)
+scale = Vector2(0.1, 0.1)
+script = SubResource("GDScript_d3jor")
+
+[node name="NeedleSprite2D" type="Sprite2D" parent="CanvasLayer/ArmLeftSprite2D"]
+position = Vector2(16, -72)
+script = SubResource("GDScript_j4p65")
+
+[node name="FaintingSprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(156, 117.5)
+scale = Vector2(390, 299)
+texture = SubResource("CanvasTexture_i7mgo")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+light_color = Color(0.865916, 0.868593, 0.782913, 1)
+spot_range = 60.75
+spot_attenuation = 0.0
+spot_angle_attenuation = 1.23114
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.99973, 0, -0.0232456, 0, 1, 0, 0.0232456, 0, -0.99973, 0, 0, -0.206137)
+visible = false
+mesh = SubResource("QuadMesh_mnx5b")
+surface_material_override/0 = SubResource("ShaderMaterial_oovjs")
