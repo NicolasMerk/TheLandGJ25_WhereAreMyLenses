@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://67axyi1xr1bu"]
 
-[ext_resource type="PackedScene" uid="uid://brir8kp0x6dgb" path="res://Assets/PlayerCharacter/Comp/camera_3d.tscn" id="1_vrj06"]
-[ext_resource type="PackedScene" uid="uid://r27l3esvu3kr" path="res://Assets/PlayerCharacter/Comp/state_manager_node_3d.tscn" id="2_x25h4"]
-[ext_resource type="PackedScene" uid="uid://cwcpl1h4ugsm3" path="res://Assets/PlayerCharacter/Comp/audio_stream_players_node.tscn" id="3_ehnau"]
-[ext_resource type="PackedScene" uid="uid://cba8njpubahpl" path="res://Assets/PlayerCharacter/Comp/gpu_particles_3d.tscn" id="4_bh4lv"]
+[ext_resource type="PackedScene" uid="uid://brir8kp0x6dgb" path="res://Assets/PlayerCharacter/Components/camera_3d.tscn" id="1_vrj06"]
+[ext_resource type="PackedScene" uid="uid://r27l3esvu3kr" path="res://Assets/PlayerCharacter/Components/state_manager_node_3d.tscn" id="2_x25h4"]
+[ext_resource type="PackedScene" uid="uid://cwcpl1h4ugsm3" path="res://Assets/PlayerCharacter/Components/audio_stream_players_node.tscn" id="3_ehnau"]
+[ext_resource type="PackedScene" uid="uid://cba8njpubahpl" path="res://Assets/PlayerCharacter/Components/gpu_particles_3d.tscn" id="4_bh4lv"]
 
 [sub_resource type="GDScript" id="GDScript_25k6p"]
 script/source = "extends CharacterBody3D

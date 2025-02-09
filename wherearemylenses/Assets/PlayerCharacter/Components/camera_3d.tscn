@@ -1,6 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://brir8kp0x6dgb"]
+[gd_scene load_steps=13 format=3 uid="uid://brir8kp0x6dgb"]
 
-[ext_resource type="Shader" path="res://WeirdAssBlurrShader.gdshader" id="1_64h4q"]
+[ext_resource type="Texture2D" uid="uid://csdcy0iay2we1" path="res://Assets/PlayerCharacter/Sprites/Player_RightHand/player_right_hand_1_clean_open.png" id="1_su4qk"]
+[ext_resource type="Texture2D" uid="uid://dfuwpnr6ky3i2" path="res://Assets/PlayerCharacter/Sprites/Player_RightHand/player_right_hand_2_decomp_few.png" id="2_nkf6h"]
+[ext_resource type="Texture2D" uid="uid://bq7jusxlatei4" path="res://Assets/PlayerCharacter/Sprites/Player_RightHand/player_right_hand_3_decomp_much.png" id="3_gcfpx"]
+[ext_resource type="Texture2D" uid="uid://cat7qobd320lm" path="res://Assets/PlayerCharacter/Sprites/Player_RightHand/player_right_hand_4_decomp_really_bad.png" id="4_w1hqq"]
+[ext_resource type="Texture2D" uid="uid://crdh6duqvspd0" path="res://Assets/PlayerCharacter/Sprites/Player_LeftHand/player_left_hand_1_clean.png" id="5_syfp3"]
+[ext_resource type="Texture2D" uid="uid://cg1db3a54fe35" path="res://Assets/PlayerCharacter/Sprites/Player_LeftHand/player_left_hand_3_nightmare.png" id="6_s6o7b"]
+[ext_resource type="Texture2D" uid="uid://02ahvbbdwee4" path="res://Assets/PlayerCharacter/Sprites/Player_Meter/Meter_Needle_V2.png" id="7_s8vci"]
 
 [sub_resource type="GDScript" id="GDScript_p4012"]
 script/source = "extends Camera3D
@@ -25,10 +31,10 @@ const ROTATION_SPEED := 1.
 script/source = "extends Sprite2D
 
 
-var tex_bubbles_none = load(\"res://Assets/Player_RightHand/PlayerRightHand_1_Clean_Open.png\")
-var tex_bubbles_few = load(\"res://Assets/Player_RightHand/PlayerRightHand_2_Decomp_Few.png\")
-var tex_bubbles_many = load(\"res://Assets/Player_RightHand/PlayerRightHand_3_Decomp_Much.png\")
-var tex_bubbles_all = load(\"res://Assets/Player_RightHand/PlayerRightHand_4_Decomp_ReallyBad.png\")
+@export var tex_bubbles_none : Texture
+@export var tex_bubbles_few : Texture
+@export var tex_bubbles_many : Texture
+@export var tex_bubbles_all : Texture
 
 enum Bubbles
 {
@@ -62,10 +68,10 @@ func set_bubbles_state(p_bubbles: Bubbles) -> void:
 [sub_resource type="GDScript" id="GDScript_d3jor"]
 script/source = "extends Sprite2D
 
-var tex_barometer_clean := load(\"res://Assets/Player_LeftHand/Player_LeftHand_1_Clean.png\")
-var tex_barometer_cursed := load(\"res://Assets/Player_Meter/Meter_2_Cursed.png\")
+@export var tex_barometer_clean : Texture
+@export var tex_barometer_cursed : Texture
 
-var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle.png\")
+@export var tex_needle : Texture
 
 @onready var offscreen_position := get_position()
 var onscreen_position = Vector2(48., 180.)
@@ -104,7 +110,7 @@ func _input(p_event: InputEvent) -> void:
 script/source = "extends Sprite2D
 
 
-var tex_needle := load(\"res://Assets/Player_Meter/Meter_Needle_V2.png\")
+@export var tex_needle : Texture
 
 
 func _ready() -> void:
@@ -116,16 +122,6 @@ func set_needle(p_value: float) -> void:
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_i7mgo"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_mnx5b"]
-flip_faces = true
-size = Vector2(2, 2)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oovjs"]
-shader = ExtResource("1_64h4q")
-shader_parameter/seed = 95.06
-shader_parameter/power = 0.05
-shader_parameter/speed = 0.16
-
 [node name="Camera3D" type="Camera3D"]
 script = SubResource("GDScript_p4012")
 
@@ -135,15 +131,23 @@ script = SubResource("GDScript_p4012")
 position = Vector2(270, 180)
 scale = Vector2(0.1, 0.1)
 script = SubResource("GDScript_cqw7g")
+tex_bubbles_none = ExtResource("1_su4qk")
+tex_bubbles_few = ExtResource("2_nkf6h")
+tex_bubbles_many = ExtResource("3_gcfpx")
+tex_bubbles_all = ExtResource("4_w1hqq")
 
 [node name="ArmLeftSprite2D" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(48, 300)
 scale = Vector2(0.1, 0.1)
 script = SubResource("GDScript_d3jor")
+tex_barometer_clean = ExtResource("5_syfp3")
+tex_barometer_cursed = ExtResource("6_s6o7b")
+tex_needle = ExtResource("7_s8vci")
 
 [node name="NeedleSprite2D" type="Sprite2D" parent="CanvasLayer/ArmLeftSprite2D"]
 position = Vector2(16, -72)
 script = SubResource("GDScript_j4p65")
+tex_needle = ExtResource("7_s8vci")
 
 [node name="FaintingSprite2D" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(156, 117.5)
@@ -155,9 +159,3 @@ light_color = Color(0.865916, 0.868593, 0.782913, 1)
 spot_range = 60.75
 spot_attenuation = 0.0
 spot_angle_attenuation = 1.23114
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.99973, 0, -0.0232456, 0, 1, 0, 0.0232456, 0, -0.99973, 0, 0, -0.206137)
-visible = false
-mesh = SubResource("QuadMesh_mnx5b")
-surface_material_override/0 = SubResource("ShaderMaterial_oovjs")

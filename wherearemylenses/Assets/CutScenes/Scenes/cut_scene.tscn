@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://ybo42w1y4o5l"]
 
-[ext_resource type="Texture2D" uid="uid://ba6b8y6ljvugf" path="res://Assets/WinSequence/frame_6.png" id="1_7k5lx"]
-[ext_resource type="Script" path="res://cut_scene.gd" id="1_08l8s"]
-[ext_resource type="Texture2D" uid="uid://dtb2edrsricn" path="res://Assets/WinSequence/frame_1.png" id="1_8rmhr"]
-[ext_resource type="AudioStream" uid="uid://de2lgryfhoqy8" path="res://Assets/_SoundFiles/TakingTheLense/taking_the_lense.wav" id="2_tmtjo"]
-[ext_resource type="Texture2D" uid="uid://dpxk3nx0d3s5w" path="res://Assets/WinSequence/frame_5.png" id="2_wgp1f"]
-[ext_resource type="Texture2D" uid="uid://i03hgadky3om" path="res://Assets/WinSequence/frame_4_blackscreen.png" id="3_yyekj"]
-[ext_resource type="Texture2D" uid="uid://c1qohqo1o01i3" path="res://Assets/WinSequence/frame_3.png" id="4_3rn5a"]
-[ext_resource type="Texture2D" uid="uid://q2o84wqynuu0" path="res://Assets/WinSequence/frame_2.png" id="5_j2pg0"]
+[ext_resource type="Script" path="res://Assets/CutScenes/cut_scene.gd" id="1_l4sv3"]
+[ext_resource type="AudioStream" uid="uid://ben8c6uu7lipv" path="res://Assets/PlayerCharacter/Audio/TakingTheLense/taking_the_lense.wav" id="2_btevs"]
+[ext_resource type="Texture2D" uid="uid://ba6b8y6ljvugf" path="res://Assets/CutScenes/Sprites/WinSequence/frame_6.png" id="3_000hr"]
+[ext_resource type="Texture2D" uid="uid://dpxk3nx0d3s5w" path="res://Assets/CutScenes/Sprites/WinSequence/frame_5.png" id="4_sgpyx"]
+[ext_resource type="Texture2D" uid="uid://i03hgadky3om" path="res://Assets/CutScenes/Sprites/WinSequence/frame_4_blackscreen.png" id="5_be7xj"]
+[ext_resource type="Texture2D" uid="uid://c1qohqo1o01i3" path="res://Assets/CutScenes/Sprites/WinSequence/frame_3.png" id="6_bkqap"]
+[ext_resource type="Texture2D" uid="uid://q2o84wqynuu0" path="res://Assets/CutScenes/Sprites/WinSequence/frame_2.png" id="7_uv6kn"]
+[ext_resource type="Texture2D" uid="uid://dtb2edrsricn" path="res://Assets/CutScenes/Sprites/WinSequence/frame_1.png" id="8_f1l08"]
 
 [sub_resource type="Animation" id="Animation_cqkb3"]
 resource_name = "End_Cutscene"
@@ -94,11 +94,11 @@ tracks/6/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("2_tmtjo")
+"stream": ExtResource("2_btevs")
 }, {
 "end_offset": 0.0,
 "start_offset": 2.02,
-"stream": ExtResource("2_tmtjo")
+"stream": ExtResource("2_btevs")
 }],
 "times": PackedFloat32Array(10.8667, 15.5)
 }
@@ -186,7 +186,7 @@ _data = {
 }
 
 [node name="CutScene" type="Node2D" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("1_08l8s")
+script = ExtResource("1_l4sv3")
 animation_player = NodePath("AnimationPlayer")
 autoplay = false
 
@@ -200,32 +200,32 @@ movie_quit_on_finish = true
 [node name="Frame6" type="Sprite2D" parent="."]
 position = Vector2(160, 120)
 scale = Vector2(0.15918, 0.160156)
-texture = ExtResource("1_7k5lx")
+texture = ExtResource("3_000hr")
 
 [node name="Frame5" type="Sprite2D" parent="."]
 position = Vector2(159.5, 121)
 scale = Vector2(0.158691, 0.161458)
-texture = ExtResource("2_wgp1f")
+texture = ExtResource("4_sgpyx")
 
 [node name="Frame4Blackscreen" type="Sprite2D" parent="."]
 position = Vector2(160, 119)
 scale = Vector2(0.15918, 0.161458)
-texture = ExtResource("3_yyekj")
+texture = ExtResource("5_be7xj")
 
 [node name="Frame3" type="Sprite2D" parent="."]
 position = Vector2(160, 119.5)
 scale = Vector2(0.15918, 0.162109)
-texture = ExtResource("4_3rn5a")
+texture = ExtResource("6_bkqap")
 
 [node name="Frame2" type="Sprite2D" parent="."]
 position = Vector2(160, 121)
 scale = Vector2(0.162598, 0.164714)
-texture = ExtResource("5_j2pg0")
+texture = ExtResource("7_uv6kn")
 
 [node name="Frame1" type="Sprite2D" parent="."]
 position = Vector2(162, 121)
 scale = Vector2(0.161133, 0.16276)
-texture = ExtResource("1_8rmhr")
+texture = ExtResource("8_f1l08")
 
 [node name="Taking The lense" type="AudioStreamPlayer" parent="."]
 volume_db = -6.0
