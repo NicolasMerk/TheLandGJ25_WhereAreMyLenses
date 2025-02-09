@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://r27l3esvu3kr"]
+
+[sub_resource type="GDScript" id="GDScript_rr2cc"]
+script/source = "extends Node3D
+
+
+var tank_pressure := MAX_TANK_PRESSURE
+
+var nitrogen_saturation := 0.
+var oxygen_saturation := MAX_OXYGEN_SATURATION
+var oxygen_consumption_factor := 1.
+
+const MAX_TANK_PRESSURE := 200.
+
+const NITROGEN_SATURATION_RATE := 1. # This value is a factor for the nitrogen_saturation increase/decrease.
+const MAX_NITROGEN_EXCESS := 24. # This valua is used to check for decompression sickness.
+const MAX_NITROGEN_SATURATION := 100. # nitrogen_saturation > MAX_NITROGEN_SATURATION leads to max depth_intoxication.
+
+const MAX_OXYGEN_SATURATION := 21.
+const CRITICAL_OXYGEN_SATURATION := 10.
+const PULSATING_FREQUENCY := 5.
+
+func _process(p_delta: float) -> void:
+	$\"../Camera3D/CanvasLayer/ArmLeftSprite2D/NeedleSprite2D\".set_needle(tank_pressure / MAX_TANK_PRESSURE)
+
+	nitrogen_saturation = lerp(nitrogen_saturation, global_position.y, p_delta * NITROGEN_SATURATION_RATE)
+
+	var depth_intoxication := nitrogen_saturation / MAX_NITROGEN_SATURATION
+	if randf() < depth_intoxication:
+		do_something_cursed()
+
+	var bubbles_state := int(maxf(global_position.y - nitrogen_saturation, 0.) / MAX_NITROGEN_EXCESS)
+	$\"../Camera3D/CanvasLayer/ArmRightSprite2D\".set_bubbles_state(bubbles_state)
+
+	oxygen_saturation -= p_delta * oxygen_consumption_factor
+
+	var faint_alpha := smoothstep(CRITICAL_OXYGEN_SATURATION, 0., oxygen_saturation)
+	var pulse_sinus := sin(float(Time.get_ticks_usec()) * .000001 * PULSATING_FREQUENCY) * .5 + .5
+	var lerped_sinus := pulse_sinus + faint_alpha * 2. - 1.
+	$\"../Camera3D/CanvasLayer/FaintingSprite2D\".self_modulate.a = clampf(lerped_sinus, 0., 1.)
+
+	if bubbles_state >= 3 or oxygen_saturation <= 0.:
+		$\"..\".await_game_over()
+
+# This function shall select a 
+func do_something_cursed() -> void:
+	pass
+"
+
+[node name="StateManagerNode3D" type="Node3D"]
+script = SubResource("GDScript_rr2cc")
