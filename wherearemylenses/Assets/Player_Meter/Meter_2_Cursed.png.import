@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cn3emlqxwxewp"
-path="res://.godot/imported/Meter_2_Cursed.png-aeb72d39793e2d72c279c6c0eaad1d85.ctex"
+path="res://.godot/imported/meter_2_cursed.png-100b5cc8425de10e781bc569d87dca57.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Player_Meter/Meter_2_Cursed.png"
-dest_files=["res://.godot/imported/Meter_2_Cursed.png-aeb72d39793e2d72c279c6c0eaad1d85.ctex"]
+source_file="res://Assets/Player_Meter/meter_2_cursed.png"
+dest_files=["res://.godot/imported/meter_2_cursed.png-100b5cc8425de10e781bc569d87dca57.ctex"]
 
 [params]
 

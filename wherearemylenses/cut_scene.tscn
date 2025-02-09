@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://ybo42w1y4o5l"]
 
-[ext_resource type="Texture2D" uid="uid://ba6b8y6ljvugf" path="res://Assets/WinSequence/Frame_6.png" id="1_7k5lx"]
+[ext_resource type="Texture2D" uid="uid://ba6b8y6ljvugf" path="res://Assets/WinSequence/frame_6.png" id="1_7k5lx"]
 [ext_resource type="Script" path="res://cut_scene.gd" id="1_08l8s"]
-[ext_resource type="Texture2D" uid="uid://dtb2edrsricn" path="res://Assets/WinSequence/Frame_1.png" id="1_8rmhr"]
-[ext_resource type="AudioStream" uid="uid://de2lgryfhoqy8" path="res://Assets/_SoundFiles/TakingTheLense/TakingTheLense.wav" id="2_tmtjo"]
-[ext_resource type="Texture2D" uid="uid://dpxk3nx0d3s5w" path="res://Assets/WinSequence/Frame_5.png" id="2_wgp1f"]
-[ext_resource type="Texture2D" uid="uid://i03hgadky3om" path="res://Assets/WinSequence/Frame_4_blackscreen.png" id="3_yyekj"]
-[ext_resource type="Texture2D" uid="uid://c1qohqo1o01i3" path="res://Assets/WinSequence/Frame_3.png" id="4_3rn5a"]
-[ext_resource type="Texture2D" uid="uid://q2o84wqynuu0" path="res://Assets/WinSequence/Frame_2.png" id="5_j2pg0"]
+[ext_resource type="Texture2D" uid="uid://dtb2edrsricn" path="res://Assets/WinSequence/frame_1.png" id="1_8rmhr"]
+[ext_resource type="AudioStream" uid="uid://de2lgryfhoqy8" path="res://Assets/_SoundFiles/TakingTheLense/taking_the_lense.wav" id="2_tmtjo"]
+[ext_resource type="Texture2D" uid="uid://dpxk3nx0d3s5w" path="res://Assets/WinSequence/frame_5.png" id="2_wgp1f"]
+[ext_resource type="Texture2D" uid="uid://i03hgadky3om" path="res://Assets/WinSequence/frame_4_blackscreen.png" id="3_yyekj"]
+[ext_resource type="Texture2D" uid="uid://c1qohqo1o01i3" path="res://Assets/WinSequence/frame_3.png" id="4_3rn5a"]
+[ext_resource type="Texture2D" uid="uid://q2o84wqynuu0" path="res://Assets/WinSequence/frame_2.png" id="5_j2pg0"]
 
 [sub_resource type="Animation" id="Animation_cqkb3"]
 resource_name = "End_Cutscene"
